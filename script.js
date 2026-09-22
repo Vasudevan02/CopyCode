@@ -480,7 +480,57 @@ button{
       <button type="submit">Submit Feedback</button>
     </form>
   </body>
-</html>`
+</html>`,
+
+    // 30. Install TypeScript Globally
+    `npm install -g typescript`,
+
+    // 31. Verify TypeScript Installation
+    `tsc -v`,
+
+    // 32. Install ts-node Globally
+    `npm install -g ts-node`,
+
+    // 33. Create TypeScript Directory
+    `mkdir TypeScript`,
+
+    // 34. Change Directory
+    `cd TypeScript`,
+
+    // 35. Install TypeScript as Dev Dependency
+    `npm install typescript --save-dev`,
+
+    // 36. TypeScript Program (TypeScript.ts)
+    `console.log("Hellow world");
+console.log("Arithmetic operation");
+
+var num1 = 10;
+var num2 = 2;
+var res = 0;
+
+res = num1 - num2;
+console.log("Difference: " + res);
+
+res = num1 * num2;
+console.log("Multiplication: " + res);
+
+res = num1 % num2;
+console.log("Remainder: " + res);
+
+res = num1 + num2;
+console.log("Remainder: " + res); 
+
+num1++;
+console.log("value of num1 after increment: " + num1);
+
+num2--;
+console.log("value of num2 after decrement: " + num2);`,
+
+    // 37. Compile TypeScript File
+    `tsc TypeScript.ts`,
+
+    // 38. Run Compiled JavaScript with Node
+    `node TypeScript.js`
   ];
 
   const cards = document.querySelectorAll('.code-card');
@@ -602,6 +652,8 @@ button{
         pageTitle.textContent = 'Simple Registration Form (HTML Inline)';
       } else if (targetId === 'feedback-form') {
         pageTitle.textContent = 'Feedback Form (HTML Inline)';
+      } else if (targetId === 'simple-ts-program') {
+        pageTitle.textContent = 'Simple TypeScript Program';
       }
 
       sections.forEach(section => {
