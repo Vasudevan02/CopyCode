@@ -1,337 +1,68 @@
 (function () {
   const codeSnippets = [
-    // 1. Navbar.jsx (from D:\Roter Program\src\Navbar.jsx)
-    `import React from "react";
-import { NavLink } from "react-router-dom";
 
-const navItems = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About Us" },
-  { path: "/contact", label: "Contact" },
-];
+    // ── SECTION 1: Git Commands (indices 0–18) ──────────────────────────────
 
-export default function Navbar() {
-  return (
-    <header className="navbar-header">
-      <div className="navbar-container">
-        <div className="brand-section">
-          <div className="brand-icon-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.5L4.5 9 12 4.9 19.5 9 12 11.5zM6 12.35v3.82c0 2.21 2.69 4 6 4s6-1.79 6-4v-3.82l-6 3.27-6-3.27z"/>
-            </svg>
-          </div>
-          <span className="brand-title">GP Kadur Portal</span>
-        </div>
-        <nav className="nav-menu">
-          {navItems.map((item) => (
-            <NavLink key={item.path} to={item.path} className={({ isActive }) => (isActive ? "nav-link-btn active" : "nav-link-btn")}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-    </header>
-  );
-}`,
-
-    // 2. Home.jsx (from D:\Roter Program\src\Home.jsx)
-    `import React from "react";
-import { Link } from "react-router-dom";
-import clgImg from "./clg.png";
-
-export default function Home() {
-  return (
-    <div className="portal-card">
-      <h1 className="home-heading">Welcome to home page</h1>
-      <div className="image-frame">
-        <img src={clgImg} alt="Government Polytechnic Kadur" className="college-photo" />
-      </div>
-      <Link to="/about" className="portal-btn-primary">
-        Go to About page &rarr;
-      </Link>
-    </div>
-  );
-}`,
-
-    // 3. About.jsx (from D:\Roter Program\src\About.jsx)
-    `import React from "react";
-import { Link } from "react-router-dom";
-
-const info = [
-  ["Institution Name", "Government Polytechnic, Kadur"],
-  ["Affiliation & Recognition", "DTE Karnataka & AICTE Approved"],
-  ["Inaugurated By", "Dr. M. C. Sudhakar"],
-  ["Official Portal", "gpt.karnataka.gov.in/gptkadur", true],
-];
-
-const cards = [
-  { icon: "📱", title: "Academics & Admissions", desc: "Offering diploma programs across odd and even semesters, 1st year induction programs, and lateral entry opportunities." },
-  { icon: "📄", title: "Circulars & Regulatory", desc: "Transparent public administration in compliance with AICTE standards, RTI guidelines, exam updates, and official government circulars." },
-  { icon: "⭐", title: "Activities & Co-Curricular", desc: "Active student life featuring technical industrial visits, community Shramadana initiatives, annual sports meets, and cultural events." },
-];
-
-export default function About() {
-  return (
-    <div className="portal-card">
-      <div className="gov-badge">❖ Govt. of Karnataka · Dept. of Technical Education</div>
-      <h1 className="about-heading">About Government Polytechnic, Kadur</h1>
-      <p className="about-summary">Government Polytechnic Kadur is a premier state technical institution approved by AICTE, committed to imparting high-standard diploma engineering education and skill development in Karnataka.</p>
-      <div className="details-container">
-        {info.map(([k, v, isLink]) => (
-          <div key={k} className="details-row"><span className="details-label">{k}</span><span className={isLink ? "details-link" : "details-value"}>{v}</span></div>
-        ))}
-      </div>
-      <div className="cards-grid">
-        {cards.map((c) => (
-          <div key={c.title} className="feature-box"><div className="feature-icon-wrapper">{c.icon}</div><h3 className="feature-title">{c.title}</h3><p className="feature-desc">{c.desc}</p></div>
-        ))}
-      </div>
-      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
-    </div>
-  );
-}`,
-
-    // 4. Contact.jsx (from D:\Roter Program\src\Contact.jsx)
-    `import React from "react";
-import { Link } from "react-router-dom";
-
-const contactData = [
-  { icon: "📍", label: "Address", val: "Kadur - Birur Bypass Road, Kadur, Karnataka 577548" },
-  { icon: "📞", label: "Phone", val: "+91 8267 221234 / 221235" },
-  { icon: "✉️", label: "Email", val: "gptkadur.principal@karnataka.gov.in" },
-  { icon: "⏰", label: "Office Timings", val: "Monday to Saturday, 9:00 AM – 5:00 PM" },
-];
-
-export default function Contact() {
-  return (
-    <div className="portal-card">
-      <div className="gov-badge">📞 Helpdesk & Inquiries</div>
-      <h1 className="about-heading">Contact Us</h1>
-      <p className="about-summary">Reach out to Government Polytechnic, Kadur administration for admissions, document verification, and academic support.</p>
-      <div className="details-container">
-        {contactData.map((item) => (
-          <div key={item.label} className="details-row">
-            <span className="details-label">{item.icon} {item.label}</span>
-            <span className="details-value">{item.val}</span>
-          </div>
-        ))}
-      </div>
-      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
-    </div>
-  );
-}`,
-
-    // 5. App.jsx (from D:\Roter Program\src\App.jsx)
-    `import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import About from "./About";
-import Contact from "./Contact";
-import "./App.css";
-
-export default function App() {
-  return (
-    <div className="app-layout">
-      <Navbar />
-      <main className="main-wrapper">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-    </div>
-  );
-}`,
-
-    // 6. main.jsx (from D:\Roter Program\src\main.jsx)
-    `import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
-import './index.css'
-import App from './App.jsx'
-
-createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </BrowserRouter>
-)`,
-
-    // 7. Registration App.jsx
-    `import React from 'react'
-import './App.css'
-
-function App() {
-  const hello = (e) => {
-      e.preventDefault();
-      alert("Registration succesfull")
-    }
-  return (
-    <div className="main">
-      <div className="App">
-        <form onSubmit={hello}>
-          <h1 className="heading">Registration Form</h1>
-          <input
-            type="text"
-            className="input-field"
-            placeholder="Enter your first name"
-          />
-          <input
-            type="text"
-            className="input-field"
-            placeholder="Enter your last name"
-          />
-          <input
-            type="email"
-            className="input-field"
-            placeholder="Enter your email"
-          />
-          <input
-            type="password"
-            className="input-field"
-            placeholder="Enter your password"
-          />
-          <div>
-            <input type="checkbox" className="checkbox" />I agree to the terms and conditions
-          </div>
-          <button type="submit">Register Now</button>
-        </form>
-      </div>
-      <h1 className="side-text">
-        GPTK <br></br>REGISTRATION<br></br> FORM
-      </h1>
-    </div>
-  );
-}
-export default App`,
-
-    // 8. Registration App.css
-    `*{
-  padding:0;
-  margin:0;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  box-sizing: border-box;
-}
-.main{
-  width:100vw;
-  height:100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #7681ff;
-  gap:10px;
-}
-.App{
-  color:rgb(0, 0, 0);
-  background-color: #f9f8f8;
-  display: flex;
-  justify-content: center;
-  align-items: space-around;
-  padding: 20px;
-  border-radius: 10px;
-}
-form{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  gap:20px;
-  width:300px;
-  height:400px;
-}
-.heading{
-  font-size: 20px;
-  font-weight: bold;
-}
-.input-field{
-  width: 250px;
-  height:30px;
-  border-radius: 5px;
-  border: 1px solid #7a7a7a;
-  padding-left: 10px;
-}
-.checkbox{
-  margin-right: 10px;
-}
-button{
-  width: 150px;
-  height: 35px;
-  border-radius: 5px;
-  border: none;
-  background-color: #7681ff;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-.side-text{
-  color:white;
-  font-weight: bold;
-  font-size: 50px;
-  text-align: center;
-}`,
-
-    // 9. Git: Add Username
+    // 0. Add Username
     `git config --global user.name "Our Name"`,
 
-    // 10. Git: Add Email
+    // 1. Add Email
     `git config --global user.email "Our email"`,
 
-    // 11. Git: Check Username
+    // 2. Check Username
     `git config --global user.name`,
 
-    // 12. Git: Check Email
+    // 3. Check Email
     `git config --global user.email`,
 
-    // 13. Git: Change Directory
+    // 4. Change Directory
     `cd DirectoryName`,
 
-    // 14. Git: Go Back Directory
+    // 5. Go Back Directory
     `cd ..`,
 
-    // 15. Git: List Files/Folders
+    // 6. List Files/Folders
     `ls`,
 
-    // 16. Git: Create File
+    // 7. Create File
     `touch FileName`,
 
-    // 17. Git: Initialize Repository
+    // 8. Initialize Repository
     `git init`,
 
-    // 18. Git: Display Status
+    // 9. Display Status
     `git status`,
 
-    // 19. Git: Add Changes (Stage All)
+    // 10. Add Changes (Stage All)
     `git add .`,
 
-    // 20. Git: Commit to Repository
+    // 11. Commit to Repository
     `git commit -m "UserCommit"`,
 
-    // 21. Git: Display Commit History
+    // 12. Display Commit History
     `git log`,
 
-    // 22. Git: List Branches
+    // 13. List Branches
     `git branch`,
 
-    // 23. Git: Switch Branch
+    // 14. Switch Branch
     `git checkout <branch>`,
 
-    // 24. Git: Merge Branch
+    // 15. Merge Branch
     `git merge <branch>`,
 
-    // 25. Git: Set GitHub Origin URL
+    // 16. Set GitHub Origin URL
     `git remote add origin "OurRepositoryURL"`,
 
-    // 26. Git: Push to GitHub
+    // 17. Push to GitHub
     `git push`,
 
-    // 27. Git: Pull from GitHub
+    // 18. Pull from GitHub
     `git pull`,
 
-    // 28. Simple Registration Form (HTML Inline)
+    // ── SECTION 2: Simple Reg Form (index 19) ───────────────────────────────
+
+    // 19. Simple Registration Form (HTML Inline)
     `<!doctype html>
 <html>
   <head>
@@ -394,7 +125,9 @@ button{
   </body>
 </html>`,
 
-    // 29. Feedback Form (HTML Inline)
+    // ── SECTION 3: Feedback Form (index 20) ─────────────────────────────────
+
+    // 20. Feedback Form (HTML Inline)
     `<!doctype html>
 <html>
   <head>
@@ -482,25 +215,27 @@ button{
   </body>
 </html>`,
 
-    // 30. Install TypeScript Globally
+    // ── SECTION 4: Simple TS Program (indices 21–29) ─────────────────────────
+
+    // 21. Install TypeScript Globally
     `npm install -g typescript`,
 
-    // 31. Verify TypeScript Installation
+    // 22. Verify TypeScript Installation
     `tsc -v`,
 
-    // 32. Install ts-node Globally
+    // 23. Install ts-node Globally
     `npm install -g ts-node`,
 
-    // 33. Create TypeScript Directory
+    // 24. Create TypeScript Directory
     `mkdir TypeScript`,
 
-    // 34. Change Directory
+    // 25. Change Directory
     `cd TypeScript`,
 
-    // 35. Install TypeScript as Dev Dependency
+    // 26. Install TypeScript as Dev Dependency
     `npm install typescript --save-dev`,
 
-    // 36. TypeScript Program (TypeScript.ts)
+    // 27. TypeScript Program (TypeScript.ts)
     `console.log("Hellow world");
 console.log("Arithmetic operation");
 
@@ -526,11 +261,343 @@ console.log("value of num1 after increment: " + num1);
 num2--;
 console.log("value of num2 after decrement: " + num2);`,
 
-    // 37. Compile TypeScript File
+    // 28. Compile TypeScript File
     `tsc TypeScript.ts`,
 
-    // 38. Run Compiled JavaScript with Node
-    `node TypeScript.js`
+    // 29. Run Compiled JavaScript with Node
+    `node TypeScript.js`,
+
+    // ── SECTION 5: Registration Form React (indices 30–33) ───────────────────
+
+    // 30. Create Vite Project
+    `npm create vite@latest`,
+
+    // 31. App.jsx (Registration Form)
+    `import React from 'react'
+import './App.css'
+
+function App() {
+  const hello = (e) => {
+      e.preventDefault();
+      alert("Registration succesfull")
+    }
+  return (
+    <div className="main">
+      <div className="App">
+        <form onSubmit={hello}>
+          <h1 className="heading">Registration Form</h1>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter your first name"
+          />
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter your last name"
+          />
+          <input
+            type="email"
+            className="input-field"
+            placeholder="Enter your email"
+          />
+          <input
+            type="password"
+            className="input-field"
+            placeholder="Enter your password"
+          />
+          <div>
+            <input type="checkbox" className="checkbox" />I agree to the terms and conditions
+          </div>
+          <button type="submit">Register Now</button>
+        </form>
+      </div>
+      <h1 className="side-text">
+        GPTK <br></br>REGISTRATION<br></br> FORM
+      </h1>
+    </div>
+  );
+}
+export default App`,
+
+    // 32. App.css (Registration Form)
+    `*{
+  padding:0;
+  margin:0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
+}
+.main{
+  width:100vw;
+  height:100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #7681ff;
+  gap:10px;
+}
+.App{
+  color:rgb(0, 0, 0);
+  background-color: #f9f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
+  padding: 20px;
+  border-radius: 10px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap:20px;
+  width:300px;
+  height:400px;
+}
+.heading{
+  font-size: 20px;
+  font-weight: bold;
+}
+.input-field{
+  width: 250px;
+  height:30px;
+  border-radius: 5px;
+  border: 1px solid #7a7a7a;
+  padding-left: 10px;
+}
+.checkbox{
+  margin-right: 10px;
+}
+button{
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #7681ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.side-text{
+  color:white;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+}`,
+
+    // 33. Run Development Server
+    `npm run dev`,
+
+    // ── SECTION 6: React Router Code (indices 34–43) ─────────────────────────
+
+    // 34. Create Vite Project
+    `npm create vite@latest`,
+
+    // 35. Install React Router
+    `npm install react-router-dom`,
+
+    // 36. App.jsx (React Router)
+    `import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar";
+import Home from "./Home";
+import About from "./About";
+import Contact from "./Contact";
+import "./App.css";
+
+export default function App() {
+  return (
+    <div className="app-layout">
+      <Navbar />
+      <main className="main-wrapper">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}`,
+
+    // 37. App.css (React Router)
+    `:root {
+  --blue: #2563eb;
+  --white: #ffffff;
+  --bg: #f1f5f9;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
+
+.navbar-header { background: var(--white); border-bottom: 1px solid var(--border); }
+.navbar-container {
+  max-width: 1100px; margin: auto; padding: 0 24px; height: 62px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand-section { display: flex; align-items: center; gap: 10px; }
+.brand-icon-box {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.brand-title { font-size: 17px; font-weight: 700; }
+.nav-menu { display: flex; gap: 6px; }
+.nav-link-btn {
+  text-decoration: none; font-size: 14px; color: var(--muted);
+  padding: 7px 16px; border-radius: 999px; transition: 0.2s;
+}
+.nav-link-btn:hover, .nav-link-btn.active { background: #eff6ff; color: var(--blue); font-weight: 600; }
+
+.app-layout { min-height: 100vh; display: flex; flex-direction: column; }
+.main-wrapper { flex: 1; display: flex; justify-content: center; padding: 32px 16px; }
+.portal-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+  width: 100%; max-width: 880px; padding: 36px 32px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}`,
+
+    // 38. main.jsx (React Router)
+    `import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </BrowserRouter>
+)`,
+
+    // 39. About.jsx
+    `import React from "react";
+import { Link } from "react-router-dom";
+
+const info = [
+  ["Institution Name", "Government Polytechnic, Kadur"],
+  ["Affiliation & Recognition", "DTE Karnataka & AICTE Approved"],
+  ["Inaugurated By", "Dr. M. C. Sudhakar"],
+  ["Official Portal", "gpt.karnataka.gov.in/gptkadur", true],
+];
+
+const cards = [
+  { icon: "📱", title: "Academics & Admissions", desc: "Offering diploma programs across odd and even semesters, 1st year induction programs, and lateral entry opportunities." },
+  { icon: "📄", title: "Circulars & Regulatory", desc: "Transparent public administration in compliance with AICTE standards, RTI guidelines, exam updates, and official government circulars." },
+  { icon: "⭐", title: "Activities & Co-Curricular", desc: "Active student life featuring technical industrial visits, community Shramadana initiatives, annual sports meets, and cultural events." },
+];
+
+export default function About() {
+  return (
+    <div className="portal-card">
+      <div className="gov-badge">❖ Govt. of Karnataka · Dept. of Technical Education</div>
+      <h1 className="about-heading">About Government Polytechnic, Kadur</h1>
+      <p className="about-summary">Government Polytechnic Kadur is a premier state technical institution approved by AICTE, committed to imparting high-standard diploma engineering education and skill development in Karnataka.</p>
+      <div className="details-container">
+        {info.map(([k, v, isLink]) => (
+          <div key={k} className="details-row"><span className="details-label">{k}</span><span className={isLink ? "details-link" : "details-value"}>{v}</span></div>
+        ))}
+      </div>
+      <div className="cards-grid">
+        {cards.map((c) => (
+          <div key={c.title} className="feature-box"><div className="feature-icon-wrapper">{c.icon}</div><h3 className="feature-title">{c.title}</h3><p className="feature-desc">{c.desc}</p></div>
+        ))}
+      </div>
+      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+    </div>
+  );
+}`,
+
+    // 40. Home.jsx
+    `import React from "react";
+import { Link } from "react-router-dom";
+import clgImg from "./clg.png";
+
+export default function Home() {
+  return (
+    <div className="portal-card">
+      <h1 className="home-heading">Welcome to home page</h1>
+      <div className="image-frame">
+        <img src={clgImg} alt="Government Polytechnic Kadur" className="college-photo" />
+      </div>
+      <Link to="/about" className="portal-btn-primary">
+        Go to About page &rarr;
+      </Link>
+    </div>
+  );
+}`,
+
+    // 41. Navbar.jsx
+    `import React from "react";
+import { NavLink } from "react-router-dom";
+
+const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/about", label: "About Us" },
+  { path: "/contact", label: "Contact" },
+];
+
+export default function Navbar() {
+  return (
+    <header className="navbar-header">
+      <div className="navbar-container">
+        <div className="brand-section">
+          <div className="brand-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.5L4.5 9 12 4.9 19.5 9 12 11.5zM6 12.35v3.82c0 2.21 2.69 4 6 4s6-1.79 6-4v-3.82l-6 3.27-6-3.27z"/>
+            </svg>
+          </div>
+          <span className="brand-title">GP Kadur Portal</span>
+        </div>
+        <nav className="nav-menu">
+          {navItems.map((item) => (
+            <NavLink key={item.path} to={item.path} className={({ isActive }) => (isActive ? "nav-link-btn active" : "nav-link-btn")}>
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}`,
+
+    // 42. Contact.jsx
+    `import React from "react";
+import { Link } from "react-router-dom";
+
+const contactData = [
+  { icon: "📍", label: "Address", val: "Kadur - Birur Bypass Road, Kadur, Karnataka 577548" },
+  { icon: "📞", label: "Phone", val: "+91 8267 221234 / 221235" },
+  { icon: "✉️", label: "Email", val: "gptkadur.principal@karnataka.gov.in" },
+  { icon: "⏰", label: "Office Timings", val: "Monday to Saturday, 9:00 AM – 5:00 PM" },
+];
+
+export default function Contact() {
+  return (
+    <div className="portal-card">
+      <div className="gov-badge">📞 Helpdesk & Inquiries</div>
+      <h1 className="about-heading">Contact Us</h1>
+      <p className="about-summary">Reach out to Government Polytechnic, Kadur administration for admissions, document verification, and academic support.</p>
+      <div className="details-container">
+        {contactData.map((item) => (
+          <div key={item.label} className="details-row">
+            <span className="details-label">{item.icon} {item.label}</span>
+            <span className="details-value">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+    </div>
+  );
+}`,
+
+    // 43. Run Development Server
+    `npm run dev`
   ];
 
   const cards = document.querySelectorAll('.code-card');
@@ -642,11 +709,7 @@ console.log("value of num2 after decrement: " + num2);`,
 
       const targetId = item.getAttribute('data-target');
 
-      if (targetId === 'react-router') {
-        pageTitle.textContent = 'React Router Code Snippets';
-      } else if (targetId === 'registration') {
-        pageTitle.textContent = 'Registration Form Code Snippets';
-      } else if (targetId === 'git-commands') {
+      if (targetId === 'git-commands') {
         pageTitle.textContent = 'Git Commands';
       } else if (targetId === 'simple-reg-form') {
         pageTitle.textContent = 'Simple Registration Form (HTML Inline)';
@@ -654,6 +717,10 @@ console.log("value of num2 after decrement: " + num2);`,
         pageTitle.textContent = 'Feedback Form (HTML Inline)';
       } else if (targetId === 'simple-ts-program') {
         pageTitle.textContent = 'Simple TypeScript Program';
+      } else if (targetId === 'registration') {
+        pageTitle.textContent = 'Registration Form (React)';
+      } else if (targetId === 'react-router') {
+        pageTitle.textContent = 'React Router Code Snippets';
       }
 
       sections.forEach(section => {
