@@ -205,69 +205,64 @@ button{
   text-align: center;
 }`,
 
-    // 9. Git User Config
-    `# To add the username name to git
-git config --global user.name "Our Name"
+    // 9. Git: Add Username
+    `git config --global user.name "Our Name"`,
 
-# To add the user email to git
-git config --global user.email "Our email"
+    // 10. Git: Add Email
+    `git config --global user.email "Our email"`,
 
-# To check user name on git
-git config --global user.name
+    // 11. Git: Check Username
+    `git config --global user.name`,
 
-# To check user email on git
-git config --global user.email`,
+    // 12. Git: Check Email
+    `git config --global user.email`,
 
-    // 10. Directory & File Navigation
-    `# To change directory on git
-cd DirectoryName
+    // 13. Git: Change Directory
+    `cd DirectoryName`,
 
-# To go back directory on git
-cd ..
+    // 14. Git: Go Back Directory
+    `cd ..`,
 
-# To list files/folders on directory in git
-ls
+    // 15. Git: List Files/Folders
+    `ls`,
 
-# To create file on git
-touch FileName`,
+    // 16. Git: Create File
+    `touch FileName`,
 
-    // 11. Repository Setup & Commits
-    `# To initialize the Project to repository on git
-git init
+    // 17. Git: Initialize Repository
+    `git init`,
 
-# To display status on git
-git status
+    // 18. Git: Display Status
+    `git status`,
 
-# To add changes file before committing
-git add .
+    // 19. Git: Add Changes (Stage All)
+    `git add .`,
 
-# To commit on repository in git
-git commit -m "UserCommit"
+    // 20. Git: Commit to Repository
+    `git commit -m "UserCommit"`,
 
-# To display the history of all commits in repository
-git log`,
+    // 21. Git: Display Commit History
+    `git log`,
 
-    // 12. Branching & Merging
-    `# To list the branches on repository in git
-git branch
+    // 22. Git: List Branches
+    `git branch`,
 
-# To switch the branch into current branch on git
-git checkout <branch>
+    // 23. Git: Switch Branch
+    `git checkout <branch>`,
 
-# To combine the 2 branches into one on git
-git merge <branch>`,
+    // 24. Git: Merge Branch
+    `git merge <branch>`,
 
-    // 13. Remote Origin, Push & Pull
-    `# To set origin of github on git
-git remote add origin "OurRepositoryURL"
+    // 25. Git: Set GitHub Origin URL
+    `git remote add origin "OurRepositoryURL"`,
 
-# To upload our local commit to github on git
-git push
+    // 26. Git: Push to GitHub
+    `git push`,
 
-# To download & merge the latest changes from github to our computer
-git pull`,
+    // 27. Git: Pull from GitHub
+    `git pull`,
 
-    // 14. All Git Commands (Complete Cheatsheet)
+    // 28. All Git Commands (Complete Cheatsheet)
     `# ==========================================
 # GIT CONFIGURATION
 # ==========================================
