@@ -60,6 +60,13 @@ body {
   color: var(--text-muted);
 }
 
+/* Code Sections */
+.code-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
 /* Individual Code Card */
 .code-card {
   background-color: var(--card-bg);
