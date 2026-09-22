@@ -458,12 +458,49 @@ body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--t
   background: var(--white); border: 1px solid var(--border); border-radius: 14px;
   width: 100%; max-width: 880px; padding: 36px 32px;
   display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+.home-heading, .about-heading { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+.about-summary { font-size: 14px; color: var(--muted); max-width: 620px; line-height: 1.6; margin-bottom: 24px; }
+.gov-badge {
+  background: #eff6ff; border: 1px solid #bfdbfe; color: var(--blue);
+  padding: 5px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 14px;
+}
+.image-frame { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 24px; }
+.college-photo { width: 100%; max-height: 400px; object-fit: cover; display: block; }
+.portal-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  background: var(--blue); color: #fff; padding: 10px 22px;
+  border-radius: 8px; font-size: 14px; font-weight: 600; transition: 0.2s;
+}
+.portal-btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+.details-container {
+  width: 100%; max-width: 640px; background: #f8fafc;
+  border: 1px solid #edf2f7; border-radius: 10px;
+  padding: 4px 20px; margin-bottom: 24px; text-align: left;
+}
+.details-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 13.5px; }
+.details-row:last-child { border-bottom: none; }
+.details-label { color: var(--muted); }
+.details-value { font-weight: 700; }
+.details-link { color: var(--blue); font-weight: 600; }
+
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; max-width: 760px; margin-bottom: 24px; text-align: left; }
+.feature-box { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
+.feature-icon-wrapper { font-size: 20px; margin-bottom: 10px; }
+.feature-title { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
+.feature-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+@media (max-width: 700px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .portal-card { padding: 24px 16px; }
 }`,
 
     // 38. main.jsx (React Router)
     `import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
@@ -522,14 +559,13 @@ export default function About() {
     // 42. Home.jsx
     `import React from "react";
 import { Link } from "react-router-dom";
-import clgImg from "./clg.png";
 
 export default function Home() {
   return (
     <div className="portal-card">
       <h1 className="home-heading">Welcome to home page</h1>
       <div className="image-frame">
-        <img src={clgImg} alt="Government Polytechnic Kadur" className="college-photo" />
+        <img src="https://placehold.co/600x400?text=Government+Polytechnic+Kadur" alt="Government Polytechnic Kadur" className="college-photo" />
       </div>
       <Link to="/about" className="portal-btn-primary">
         Go to About page &rarr;
