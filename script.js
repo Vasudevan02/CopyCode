@@ -203,14 +203,172 @@ button{
   font-weight: bold;
   font-size: 50px;
   text-align: center;
-}`
+}`,
+
+    // 9. Git User Config
+    `# To add the username name to git
+git config --global user.name "Our Name"
+
+# To add the user email to git
+git config --global user.email "Our email"
+
+# To check user name on git
+git config --global user.name
+
+# To check user email on git
+git config --global user.email`,
+
+    // 10. Directory & File Navigation
+    `# To change directory on git
+cd DirectoryName
+
+# To go back directory on git
+cd ..
+
+# To list files/folders on directory in git
+ls
+
+# To create file on git
+touch FileName`,
+
+    // 11. Repository Setup & Commits
+    `# To initialize the Project to repository on git
+git init
+
+# To display status on git
+git status
+
+# To add changes file before committing
+git add .
+
+# To commit on repository in git
+git commit -m "UserCommit"
+
+# To display the history of all commits in repository
+git log`,
+
+    // 12. Branching & Merging
+    `# To list the branches on repository in git
+git branch
+
+# To switch the branch into current branch on git
+git checkout <branch>
+
+# To combine the 2 branches into one on git
+git merge <branch>`,
+
+    // 13. Remote Origin, Push & Pull
+    `# To set origin of github on git
+git remote add origin "OurRepositoryURL"
+
+# To upload our local commit to github on git
+git push
+
+# To download & merge the latest changes from github to our computer
+git pull`,
+
+    // 14. All Git Commands (Complete Cheatsheet)
+    `# ==========================================
+# GIT CONFIGURATION
+# ==========================================
+# To add the username name to git
+git config --global user.name "Our Name"
+
+# To add the user email to git
+git config --global user.email "Our email"
+
+# To check user name on git
+git config --global user.name
+
+# To check user email on git
+git config --global user.email
+
+
+# ==========================================
+# DIRECTORY & FILE NAVIGATION
+# ==========================================
+# To change directory on git
+cd DirectoryName
+
+# To go back directory on git
+cd ..
+
+# To list files/folders on directory in git
+ls
+
+# To create file on git
+touch FileName
+
+
+# ==========================================
+# REPOSITORY & COMMITS
+# ==========================================
+# To initialize the Project to repository on git
+git init
+
+# To display status on git
+git status
+
+# To add changes file before committing
+git add .
+
+# To commit on repository in git
+git commit -m "UserCommit"
+
+# To display the history of all commits in repository
+git log
+
+
+# ==========================================
+# BRANCHING & MERGING
+# ==========================================
+# To list the branches on repository in git
+git branch
+
+# To switch the branch into current branch on git
+git checkout <branch>
+
+# To combine the 2 branches into one on git
+git merge <branch>
+
+
+# ==========================================
+# GITHUB REMOTE, PUSH & PULL
+# ==========================================
+# To set origin of github on git
+git remote add origin "OurRepositoryURL"
+
+# To upload our local commit to github on git
+git push
+
+# To download & merge the latest changes from github to our computer
+git pull`
   ];
 
   const cards = document.querySelectorAll('.code-card');
 
+  function calculateCardHeights() {
+    requestAnimationFrame(() => {
+      cards.forEach(card => {
+        const codeBlock = card.querySelector('.code-content');
+        const preBlock = card.querySelector('pre');
+        const lineNumbers = card.querySelector('.line-numbers');
+        if (lineNumbers && codeBlock) {
+          const fullHeight = Math.max(
+            lineNumbers.scrollHeight,
+            preBlock ? preBlock.scrollHeight : 0,
+            codeBlock.scrollHeight
+          );
+          if (fullHeight > 0) {
+            lineNumbers.style.minHeight = `${fullHeight}px`;
+          }
+        }
+      });
+    });
+  }
+
   cards.forEach((card, index) => {
     const codeBlock = card.querySelector('.code-content');
-    const preBlock = card.querySelector('pre');
     const lineNumbers = card.querySelector('.line-numbers');
     const copyBtn = card.querySelector('.btn-copy');
     const copyIcon = card.querySelector('.copy-icon');
@@ -227,17 +385,6 @@ button{
       const text = codeBlock.textContent || "";
       const lines = text.split('\n');
       lineNumbers.innerHTML = lines.map((_, i) => `<span>${i + 1}</span>`).join('');
-
-      requestAnimationFrame(() => {
-        const fullHeight = Math.max(
-          lineNumbers.scrollHeight,
-          preBlock ? preBlock.scrollHeight : 0,
-          codeBlock.scrollHeight
-        );
-        if (fullHeight > 0) {
-          lineNumbers.style.minHeight = `${fullHeight}px`;
-        }
-      });
     }
 
     // Individual Copy handler for this card
@@ -293,6 +440,8 @@ button{
     }
   });
 
+  calculateCardHeights();
+
   // Sidebar navigation logic
   const navItems = document.querySelectorAll('.nav-item');
   const sections = document.querySelectorAll('.code-section');
@@ -309,15 +458,19 @@ button{
         pageTitle.textContent = 'React Router Code Snippets';
       } else if (targetId === 'registration') {
         pageTitle.textContent = 'Registration Form Code Snippets';
+      } else if (targetId === 'git-commands') {
+        pageTitle.textContent = 'Git Commands';
       }
 
       sections.forEach(section => {
         if (section.id === targetId) {
-          section.style.display = 'block';
+          section.style.display = 'flex';
         } else {
           section.style.display = 'none';
         }
       });
+
+      calculateCardHeights();
     });
   });
 
