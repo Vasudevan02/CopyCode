@@ -4,265 +4,258 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>React Router Code Snippets</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
-  <div class="container">
-    <header class="page-header">
-      <h1>React Router Code Snippets</h1>
-      <p>Click the copy button on any card to copy its code to your clipboard.</p>
-    </header>
+  <div class="layout-wrapper">
+    <aside class="sidebar">
+      <h2>Code Snippets</h2>
+      <ul class="nav-list">
+        <li class="nav-item active" data-target="react-router">React Router Code</li>
+        <li class="nav-item" data-target="registration">Registration Form</li>
+      </ul>
+    </aside>
 
-    <!-- Card 1: Userdetails.jsx -->
-    <div class="code-card">
-      <div class="code-toolbar">
-        <div class="left-section">
-          <div class="window-dots" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+    <div class="container">
+      <header class="page-header">
+        <h1 id="page-title">React Router Code Snippets</h1>
+        <p>Click the copy button on any card to copy its code to your clipboard.</p>
+      </header>
+
+      <div id="react-router" class="code-section active-section">
+
+        <!-- Card 1: Navbar.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">1. Navbar.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy Navbar.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
           </div>
-          <span class="file-name">1. Userdetails.jsx</span>
-        </div>
-        <button class="btn btn-copy" type="button" aria-label="Copy Userdetails.jsx code">
-          <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span class="btn-text">Copy</span>
-        </button>
-      </div>
-      <div class="code-body">
-        <div class="line-numbers" aria-hidden="true"></div>
-        <pre><code class="code-content">import React from "react";
-import { useParams } from "react-router-dom";
-
-const UserDetail = () => {
-    const { userId } = useParams();
-    return (
-        &lt;div&gt;
-            &lt;h1&gt;User Details:&lt;/h1&gt;
-            &lt;p&gt;User information is:{userId}&lt;/p&gt;
-        &lt;/div&gt;
-    );
-};
-
-export default UserDetail;</code></pre>
-      </div>
-    </div>
-
-    <!-- Card 2: Home.jsx -->
-    <div class="code-card">
-      <div class="code-toolbar">
-        <div class="left-section">
-          <div class="window-dots" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
           </div>
-          <span class="file-name">2. Home.jsx</span>
         </div>
-        <button class="btn btn-copy" type="button" aria-label="Copy Home.jsx code">
-          <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span class="btn-text">Copy</span>
-        </button>
-      </div>
-      <div class="code-body">
-        <div class="line-numbers" aria-hidden="true"></div>
-        <pre><code class="code-content">import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-    const navigate = useNavigate();
-
-    const goabout = () => {
-        navigate("/about");
-    };
-    return (
-        &lt;div&gt;
-            &lt;h3&gt;Welcome to home page&lt;/h3&gt;
-            &lt;button onClick={goabout}&gt;Go to About page&lt;/button&gt;
-        &lt;/div&gt;
-    );
-};
-
-export default Home;</code></pre>
-      </div>
-    </div>
-
-    <!-- Card 3: App.jsx -->
-    <div class="code-card">
-      <div class="code-toolbar">
-        <div class="left-section">
-          <div class="window-dots" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+        <!-- Card 2: Home.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">2. Home.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy Home.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
           </div>
-          <span class="file-name">3. App.jsx</span>
-        </div>
-        <button class="btn btn-copy" type="button" aria-label="Copy App.jsx code">
-          <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span class="btn-text">Copy</span>
-        </button>
-      </div>
-      <div class="code-body">
-        <div class="line-numbers" aria-hidden="true"></div>
-        <pre><code class="code-content">import React from "react";
-import Home from "./Home";
-import About from "./About";
-import UserDetail from "./Userdetails";
-import UserProfile from "./UserProfile";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-const App = () => {
-    return (
-        &lt;div&gt;
-            &lt;Router&gt;
-                &lt;nav&gt;
-                    &lt;ul style={{ display: "flex", gap: "20px" }}&gt;
-                        &lt;li&gt;
-                            &lt;Link to="/"&gt;Home&lt;/Link&gt;
-                        &lt;/li&gt;
-                        &lt;li&gt;
-                            &lt;Link to="/about"&gt;About&lt;/Link&gt;
-                        &lt;/li&gt;
-                        &lt;li&gt;
-                            &lt;Link to="/user/123"&gt;User Details&lt;/Link&gt;
-                        &lt;/li&gt;
-                        &lt;li&gt;
-                            &lt;Link to="/profile"&gt;User Profile&lt;/Link&gt;
-                        &lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/nav&gt;
-                &lt;Routes&gt;
-                    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
-                    &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
-                    &lt;Route path="/user/:userId" element={&lt;UserDetail /&gt;} /&gt;
-                    &lt;Route path="/profile" element={&lt;UserProfile /&gt;} /&gt;
-                &lt;/Routes&gt;
-            &lt;/Router&gt;
-        &lt;/div&gt;
-    );
-};
-
-export default App;</code></pre>
-      </div>
-    </div>
-
-    <!-- Card 4: About.jsx -->
-    <div class="code-card">
-      <div class="code-toolbar">
-        <div class="left-section">
-          <div class="window-dots" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
           </div>
-          <span class="file-name">4. About.jsx</span>
         </div>
-        <button class="btn btn-copy" type="button" aria-label="Copy About.jsx code">
-          <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span class="btn-text">Copy</span>
-        </button>
-      </div>
-      <div class="code-body">
-        <div class="line-numbers" aria-hidden="true"></div>
-        <pre><code class="code-content">import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const About = () => {
-    const navigate = useNavigate();
-
-    const gohome = () => {
-        navigate(-1);
-    };
-    return (
-        &lt;div&gt;
-            &lt;h3&gt;Welcome to about us page&lt;/h3&gt;
-            &lt;button onClick={gohome}&gt;Go to Home Page&lt;/button&gt;
-        &lt;/div&gt;
-    );
-};
-
-export default About;</code></pre>
-      </div>
-    </div>
-
-    <!-- Card 5: UserProfile.jsx -->
-    <div class="code-card">
-      <div class="code-toolbar">
-        <div class="left-section">
-          <div class="window-dots" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+        <!-- Card 3: About.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">3. About.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy About.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
           </div>
-          <span class="file-name">5. UserProfile.jsx</span>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
         </div>
-        <button class="btn btn-copy" type="button" aria-label="Copy UserProfile.jsx code">
-          <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span class="btn-text">Copy</span>
-        </button>
-      </div>
-      <div class="code-body">
-        <div class="line-numbers" aria-hidden="true"></div>
-        <pre><code class="code-content">import React from "react";
 
-const UserProfile = () => {
-    // Optional placeholder data for the user profile
-    const profileData = {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        joined: "January 2026"
-    };
+        <!-- Card 4: Contact.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">4. Contact.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy Contact.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
+          </div>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
+        </div>
 
-    return (
-        &lt;div&gt;
-            &lt;h1&gt;User Profile&lt;/h1&gt;
-            &lt;div style={{ marginTop: "20px", border: "1px solid #ccc", padding: "15px", borderRadius: "5px", maxWidth: "300px" }}&gt;
-                &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {profileData.name}&lt;/p&gt;
-                &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; {profileData.email}&lt;/p&gt;
-                &lt;p&gt;&lt;strong&gt;Member Since:&lt;/strong&gt; {profileData.joined}&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    );
-};
+        <!-- Card 5: App.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">5. App.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy App.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
+          </div>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
+        </div>
 
-export default UserProfile;</code></pre>
-      </div>
+        <!-- Card 6: main.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">6. main.jsx</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy main.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
+          </div>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
+        </div>
+
+      </div> <!-- end react-router -->
+
+      <div id="registration" class="code-section" style="display: none;">
+        <!-- Card 7: Registration App.jsx -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">1. App.jsx (Registration Form)</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy Registration App.jsx code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
+          </div>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
+        </div>
+
+        <!-- Card 8: Registration App.css -->
+        <div class="code-card">
+          <div class="code-toolbar">
+            <div class="left-section">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="file-name">2. App.css (Registration Form)</span>
+            </div>
+            <button class="btn btn-copy" type="button" aria-label="Copy Registration App.css code">
+              <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display: none;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="btn-text">Copy</span>
+            </button>
+          </div>
+          <div class="code-body">
+            <div class="line-numbers" aria-hidden="true"></div>
+            <pre><code class="code-content"></code></pre>
+          </div>
+        </div>
+      </div> <!-- end registration -->
+
     </div>
+  </div> <!-- end layout-wrapper -->
 
-  </div>
-
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>

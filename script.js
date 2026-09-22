@@ -1,126 +1,209 @@
 (function () {
   const codeSnippets = [
-    // 1. Userdetails.jsx
+    // 1. Navbar.jsx (from D:\Roter Program\src\Navbar.jsx)
     `import React from "react";
-import { useParams } from "react-router-dom";
+import './App.css'
+import { Link } from "react-router-dom"
 
-const UserDetail = () => {
-    const { userId } = useParams();
-    return (
-        <div>
-            <h1>User Details:</h1>
-            <p>User information is:{userId}</p>
+const Navbar = () => {
+    return(
+        <div className="NavBAR">
+            <Link to="/">HOME</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to="/about">ABOUT</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to="/contact">CONTACT</Link>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     );
 };
 
-export default UserDetail;`,
+export default Navbar;`,
 
-    // 2. Home.jsx
+    // 2. Home.jsx (from D:\Roter Program\src\Home.jsx)
     `import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-    const navigate = useNavigate();
+const Home=()=>{
+    return(
+        <div><h2>Welcome to home page</h2></div>
+    )
+}
 
-    const goabout = () => {
-        navigate("/about");
-    };
-    return (
-        <div>
-            <h3>Welcome to home page</h3>
-            <button onClick={goabout}>Go to About page</button>
-        </div>
-    );
-};
+export default Home`,
 
-export default Home;`,
-
-    // 3. App.jsx
+    // 3. About.jsx (from D:\Roter Program\src\About.jsx)
     `import React from "react";
+
+const About=()=>{
+    return(
+        <div><h2>This is about page</h2></div>
+    )
+}
+
+export default About;`,
+
+    // 4. Contact.jsx (from D:\Roter Program\src\Contact.jsx)
+    `import React from "react";
+
+const Contact=()=>{
+    return(
+        <h2>This is Contact</h2>
+    )
+}
+
+export default Contact;`,
+
+    // 5. App.jsx (from D:\Roter Program\src\App.jsx)
+    `import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar";
 import Home from "./Home";
 import About from "./About";
-import UserDetail from "./Userdetails";
-import UserProfile from "./UserProfile";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Contant from "./Contact"; 
+import "./App.css";
 
 const App = () => {
     return (
-        <div>
-            <Router>
-                <nav>
-                    <ul style={{ display: "flex", gap: "20px" }}>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/user/123">User Details</Link>
-                        </li>
-                        <li>
-                            <Link to="/profile">User Profile</Link>
-                        </li>
-                    </ul>
-                </nav>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/user/:userId" element={<UserDetail />} />
-                    <Route path="/profile" element={<UserProfile />} />
-                </Routes>
-            </Router>
+        <div className="App">
+            {/* The outer Router tag has been removed because it is handled by main.jsx */}
+            <Navbar /> 
+            
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contant" element={<Contant />} />
+            </Routes>
         </div>
     );
 };
 
 export default App;`,
 
-    // 4. About.jsx
-    `import React from "react";
-import { useNavigate } from "react-router-dom";
+    // 6. main.jsx (from D:\Roter Program\src\main.jsx)
+    `import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router'
+import './index.css'
+import App from './App.jsx'
 
-const About = () => {
-    const navigate = useNavigate();
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </BrowserRouter>
+)`,
 
-    const gohome = () => {
-        navigate(-1);
-    };
-    return (
-        <div>
-            <h3>Welcome to about us page</h3>
-            <button onClick={gohome}>Go to Home Page</button>
-        </div>
-    );
-};
+    // 7. Registration App.jsx
+    `import React from 'react'
+import './App.css'
 
-export default About;`,
+function App() {
+  const hello = (e) => {
+      e.preventDefault();
+      alert("Registration succesfull")
+    }
+  return (
+    <div className="main">
+      <div className="App">
+        <form onSubmit={hello}>
+          <h1 className="heading">Registration Form</h1>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter your first name"
+          />
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter your last name"
+          />
+          <input
+            type="email"
+            className="input-field"
+            placeholder="Enter your email"
+          />
+          <input
+            type="password"
+            className="input-field"
+            placeholder="Enter your password"
+          />
+          <div>
+            <input type="checkbox" className="checkbox" />I agree to the terms and conditions
+          </div>
+          <button type="submit">Register Now</button>
+        </form>
+      </div>
+      <h1 className="side-text">
+        GPTK <br></br>REGISTRATION<br></br> FORM
+      </h1>
+    </div>
+  );
+}
+export default App`,
 
-    // 5. UserProfile.jsx
-    `import React from "react";
-
-const UserProfile = () => {
-    // Optional placeholder data for the user profile
-    const profileData = {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        joined: "January 2026"
-    };
-
-    return (
-        <div>
-            <h1>User Profile</h1>
-            <div style={{ marginTop: "20px", border: "1px solid #ccc", padding: "15px", borderRadius: "5px", maxWidth: "300px" }}>
-                <p><strong>Name:</strong> {profileData.name}</p>
-                <p><strong>Email:</strong> {profileData.email}</p>
-                <p><strong>Member Since:</strong> {profileData.joined}</p>
-            </div>
-        </div>
-    );
-};
-
-export default UserProfile;`
+    // 8. Registration App.css
+    `*{
+  padding:0;
+  margin:0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
+}
+.main{
+  width:100vw;
+  height:100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #7681ff;
+  gap:10px;
+}
+.App{
+  color:rgb(0, 0, 0);
+  background-color: #f9f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
+  padding: 20px;
+  border-radius: 10px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap:20px;
+  width:300px;
+  height:400px;
+}
+.heading{
+  font-size: 20px;
+  font-weight: bold;
+}
+.input-field{
+  width: 250px;
+  height:30px;
+  border-radius: 5px;
+  border: 1px solid #7a7a7a;
+  padding-left: 10px;
+}
+.checkbox{
+  margin-right: 10px;
+}
+button{
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #7681ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.side-text{
+  color:white;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+}`
   ];
 
   const cards = document.querySelectorAll('.code-card');
@@ -145,7 +228,6 @@ export default UserProfile;`
       const lines = text.split('\n');
       lineNumbers.innerHTML = lines.map((_, i) => `<span>${i + 1}</span>`).join('');
 
-      // Guarantee the line-numbers column matches the pre content height continuously
       requestAnimationFrame(() => {
         const fullHeight = Math.max(
           lineNumbers.scrollHeight,
@@ -210,4 +292,33 @@ export default UserProfile;`
       });
     }
   });
+
+  // Sidebar navigation logic
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.code-section');
+  const pageTitle = document.getElementById('page-title');
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+
+      const targetId = item.getAttribute('data-target');
+
+      if (targetId === 'react-router') {
+        pageTitle.textContent = 'React Router Code Snippets';
+      } else if (targetId === 'registration') {
+        pageTitle.textContent = 'Registration Form Code Snippets';
+      }
+
+      sections.forEach(section => {
+        if (section.id === targetId) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    });
+  });
+
 })();
