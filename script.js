@@ -559,13 +559,14 @@ export default function About() {
     // 42. Home.jsx
     `import React from "react";
 import { Link } from "react-router-dom";
+import clgImg from "./images.jpg";
 
 export default function Home() {
   return (
     <div className="portal-card">
       <h1 className="home-heading">Welcome to home page</h1>
       <div className="image-frame">
-        <img src="https://placehold.co/600x400?text=Government+Polytechnic+Kadur" alt="Government Polytechnic Kadur" className="college-photo" />
+        <img src={clgImg} alt="Government Polytechnic Kadur" className="college-photo" />
       </div>
       <Link to="/about" className="portal-btn-primary">
         Go to About page &rarr;
