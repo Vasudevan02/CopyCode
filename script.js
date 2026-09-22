@@ -1,5 +1,4 @@
 (function () {
-  // Predefined code snippets to guarantee 100% clean text without HTML parsing artifacts
   const codeSnippets = [
     // 1. Userdetails.jsx
     `import React from "react";
@@ -128,6 +127,7 @@ export default UserProfile;`
 
   cards.forEach((card, index) => {
     const codeBlock = card.querySelector('.code-content');
+    const preBlock = card.querySelector('pre');
     const lineNumbers = card.querySelector('.line-numbers');
     const copyBtn = card.querySelector('.btn-copy');
     const copyIcon = card.querySelector('.copy-icon');
@@ -139,11 +139,23 @@ export default UserProfile;`
       codeBlock.textContent = codeSnippets[index];
     }
 
-    // Generate matching line numbers
+    // Generate matching line numbers and enforce continuous height
     if (codeBlock && lineNumbers) {
       const text = codeBlock.textContent || "";
       const lines = text.split('\n');
       lineNumbers.innerHTML = lines.map((_, i) => `<span>${i + 1}</span>`).join('');
+
+      // Guarantee the line-numbers column matches the pre content height continuously
+      requestAnimationFrame(() => {
+        const fullHeight = Math.max(
+          lineNumbers.scrollHeight,
+          preBlock ? preBlock.scrollHeight : 0,
+          codeBlock.scrollHeight
+        );
+        if (fullHeight > 0) {
+          lineNumbers.style.minHeight = `${fullHeight}px`;
+        }
+      });
     }
 
     // Individual Copy handler for this card

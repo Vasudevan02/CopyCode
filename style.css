@@ -4,6 +4,7 @@
   --header-bg: #1f242c;
   --border-color: #30363d;
   --code-bg: #0d1117;
+  --gutter-bg: #0b0f14;
   --text-color: #c9d1d9;
   --text-muted: #8b949e;
   --text-bright: #f0f6fc;
@@ -164,16 +165,17 @@ body {
   stroke-linejoin: round;
 }
 
-/* Code Area */
+/* Code Area - Flex layout with auto scroll */
 .code-body {
   position: relative;
   background-color: var(--code-bg);
   display: flex;
+  align-items: flex-start; /* Ensures children expand to their full content height */
   max-height: 520px;
   overflow: auto;
 }
 
-/* Line Numbers */
+/* Line Numbers - Continuous dark background and border from top to bottom */
 .line-numbers {
   position: sticky;
   left: 0;
@@ -185,10 +187,11 @@ body {
   font-size: 0.9rem;
   user-select: none;
   border-right: 1px solid rgba(48, 54, 61, 0.6);
-  background-color: #0b0f14;
+  background-color: var(--gutter-bg);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 
 .line-numbers span {
@@ -207,6 +210,7 @@ pre {
   color: #e6edf3;
   tab-size: 2;
   white-space: pre;
+  min-height: 100%;
 }
 
 code {
