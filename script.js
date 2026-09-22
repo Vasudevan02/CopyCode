@@ -475,7 +475,10 @@ createRoot(document.getElementById('root')).render(
   </BrowserRouter>
 )`,
 
-    // 39. About.jsx
+    // 39. Create About.jsx
+    `About.jsx`,
+
+    // 40. About.jsx
     `import React from "react";
 import { Link } from "react-router-dom";
 
@@ -513,7 +516,10 @@ export default function About() {
   );
 }`,
 
-    // 40. Home.jsx
+    // 41. Create Home.jsx
+    `Home.jsx`,
+
+    // 42. Home.jsx
     `import React from "react";
 import { Link } from "react-router-dom";
 import clgImg from "./clg.png";
@@ -532,7 +538,10 @@ export default function Home() {
   );
 }`,
 
-    // 41. Navbar.jsx
+    // 43. Create Navbar.jsx
+    `Navbar.jsx`,
+
+    // 44. Navbar.jsx
     `import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -566,7 +575,10 @@ export default function Navbar() {
   );
 }`,
 
-    // 42. Contact.jsx
+    // 45. Create Contact.jsx
+    `Contact.jsx`,
+
+    // 46. Contact.jsx
     `import React from "react";
 import { Link } from "react-router-dom";
 
@@ -596,7 +608,7 @@ export default function Contact() {
   );
 }`,
 
-    // 43. Run Development Server
+    // 47. Run Development Server
     `npm run dev`
   ];
 
