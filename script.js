@@ -2,53 +2,124 @@
   const codeSnippets = [
     // 1. Navbar.jsx (from D:\Roter Program\src\Navbar.jsx)
     `import React from "react";
-import './App.css'
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
-    return(
-        <div className="NavBAR">
-            <Link to="/">HOME</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-            <Link to="/about">ABOUT</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-            <Link to="/contact">CONTACT</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/about", label: "About Us" },
+  { path: "/contact", label: "Contact" },
+];
+
+export default function Navbar() {
+  return (
+    <header className="navbar-header">
+      <div className="navbar-container">
+        <div className="brand-section">
+          <div className="brand-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.5L4.5 9 12 4.9 19.5 9 12 11.5zM6 12.35v3.82c0 2.21 2.69 4 6 4s6-1.79 6-4v-3.82l-6 3.27-6-3.27z"/>
+            </svg>
+          </div>
+          <span className="brand-title">GP Kadur Portal</span>
         </div>
-    );
-};
-
-export default Navbar;`,
+        <nav className="nav-menu">
+          {navItems.map((item) => (
+            <NavLink key={item.path} to={item.path} className={({ isActive }) => (isActive ? "nav-link-btn active" : "nav-link-btn")}>
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}`,
 
     // 2. Home.jsx (from D:\Roter Program\src\Home.jsx)
     `import React from "react";
+import { Link } from "react-router-dom";
+import clgImg from "./clg.png";
 
-const Home=()=>{
-    return(
-        <div><h2>Welcome to home page</h2></div>
-    )
-}
-
-export default Home`,
+export default function Home() {
+  return (
+    <div className="portal-card">
+      <h1 className="home-heading">Welcome to home page</h1>
+      <div className="image-frame">
+        <img src={clgImg} alt="Government Polytechnic Kadur" className="college-photo" />
+      </div>
+      <Link to="/about" className="portal-btn-primary">
+        Go to About page &rarr;
+      </Link>
+    </div>
+  );
+}`,
 
     // 3. About.jsx (from D:\Roter Program\src\About.jsx)
     `import React from "react";
+import { Link } from "react-router-dom";
 
-const About=()=>{
-    return(
-        <div><h2>This is about page</h2></div>
-    )
-}
+const info = [
+  ["Institution Name", "Government Polytechnic, Kadur"],
+  ["Affiliation & Recognition", "DTE Karnataka & AICTE Approved"],
+  ["Inaugurated By", "Dr. M. C. Sudhakar"],
+  ["Official Portal", "gpt.karnataka.gov.in/gptkadur", true],
+];
 
-export default About;`,
+const cards = [
+  { icon: "📱", title: "Academics & Admissions", desc: "Offering diploma programs across odd and even semesters, 1st year induction programs, and lateral entry opportunities." },
+  { icon: "📄", title: "Circulars & Regulatory", desc: "Transparent public administration in compliance with AICTE standards, RTI guidelines, exam updates, and official government circulars." },
+  { icon: "⭐", title: "Activities & Co-Curricular", desc: "Active student life featuring technical industrial visits, community Shramadana initiatives, annual sports meets, and cultural events." },
+];
+
+export default function About() {
+  return (
+    <div className="portal-card">
+      <div className="gov-badge">❖ Govt. of Karnataka · Dept. of Technical Education</div>
+      <h1 className="about-heading">About Government Polytechnic, Kadur</h1>
+      <p className="about-summary">Government Polytechnic Kadur is a premier state technical institution approved by AICTE, committed to imparting high-standard diploma engineering education and skill development in Karnataka.</p>
+      <div className="details-container">
+        {info.map(([k, v, isLink]) => (
+          <div key={k} className="details-row"><span className="details-label">{k}</span><span className={isLink ? "details-link" : "details-value"}>{v}</span></div>
+        ))}
+      </div>
+      <div className="cards-grid">
+        {cards.map((c) => (
+          <div key={c.title} className="feature-box"><div className="feature-icon-wrapper">{c.icon}</div><h3 className="feature-title">{c.title}</h3><p className="feature-desc">{c.desc}</p></div>
+        ))}
+      </div>
+      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+    </div>
+  );
+}`,
 
     // 4. Contact.jsx (from D:\Roter Program\src\Contact.jsx)
     `import React from "react";
+import { Link } from "react-router-dom";
 
-const Contact=()=>{
-    return(
-        <h2>This is Contact</h2>
-    )
-}
+const contactData = [
+  { icon: "📍", label: "Address", val: "Kadur - Birur Bypass Road, Kadur, Karnataka 577548" },
+  { icon: "📞", label: "Phone", val: "+91 8267 221234 / 221235" },
+  { icon: "✉️", label: "Email", val: "gptkadur.principal@karnataka.gov.in" },
+  { icon: "⏰", label: "Office Timings", val: "Monday to Saturday, 9:00 AM – 5:00 PM" },
+];
 
-export default Contact;`,
+export default function Contact() {
+  return (
+    <div className="portal-card">
+      <div className="gov-badge">📞 Helpdesk & Inquiries</div>
+      <h1 className="about-heading">Contact Us</h1>
+      <p className="about-summary">Reach out to Government Polytechnic, Kadur administration for admissions, document verification, and academic support.</p>
+      <div className="details-container">
+        {contactData.map((item) => (
+          <div key={item.label} className="details-row">
+            <span className="details-label">{item.icon} {item.label}</span>
+            <span className="details-value">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+    </div>
+  );
+}`,
 
     // 5. App.jsx (from D:\Roter Program\src\App.jsx)
     `import React from "react";
@@ -56,25 +127,23 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";
 import About from "./About";
-import Contant from "./Contact"; 
+import Contact from "./Contact";
 import "./App.css";
 
-const App = () => {
-    return (
-        <div className="App">
-            {/* The outer Router tag has been removed because it is handled by main.jsx */}
-            <Navbar /> 
-            
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contant" element={<Contant />} />
-            </Routes>
-        </div>
-    );
-};
-
-export default App;`,
+export default function App() {
+  return (
+    <div className="app-layout">
+      <Navbar />
+      <main className="main-wrapper">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}`,
 
     // 6. main.jsx (from D:\Roter Program\src\main.jsx)
     `import { StrictMode } from 'react'
@@ -323,6 +392,94 @@ button{
       <button type="submit">Sign Up</button>
     </form>
   </body>
+</html>`,
+
+    // 29. Feedback Form (HTML Inline)
+    `<!doctype html>
+<html>
+  <head>
+    <title>Feedback</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+        background: #f7f8fc;
+      }
+      form {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        width: 320px;
+      }
+      h2 {
+        margin: 0 0 20px 0;
+      }
+      p {
+        margin: 0 0 15px 0;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #767676;
+        border-radius: 2px;
+        box-sizing: border-box;
+        margin-top: 5px;
+        font-family: sans-serif;
+      }
+      textarea {
+        resize: vertical;
+        height: 90px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form
+      onsubmit="
+        event.preventDefault();
+        alert('Thank you for your feedback!');
+        this.reset();
+      "
+    >
+      <h2>Feedback Form</h2>
+      <p>Name:<br /><input type="text" placeholder="Your name" required /></p>
+      <p>Email:<br /><input type="email" placeholder="Your email" required /></p>
+      <p>
+        Rating:
+        <br />
+        <select required>
+          <option value="">-- Select Rating --</option>
+          <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+          <option value="4">⭐⭐⭐⭐ Good</option>
+          <option value="3">⭐⭐⭐ Average</option>
+          <option value="2">⭐⭐ Poor</option>
+          <option value="1">⭐ Very Poor</option>
+        </select>
+      </p>
+      <p>
+        Message:<br />
+        <textarea placeholder="Write your feedback here..." required></textarea>
+      </p>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </body>
 </html>`
   ];
 
@@ -443,6 +600,8 @@ button{
         pageTitle.textContent = 'Git Commands';
       } else if (targetId === 'simple-reg-form') {
         pageTitle.textContent = 'Simple Registration Form (HTML Inline)';
+      } else if (targetId === 'feedback-form') {
+        pageTitle.textContent = 'Feedback Form (HTML Inline)';
       }
 
       sections.forEach(section => {
