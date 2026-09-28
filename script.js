@@ -653,6 +653,86 @@ export default function Contact() {
     // 47. Run Development Server
     `npm run dev`,
 
+    // 48. App.css (Simplified)
+    `/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Base */
+body {
+  font-family: system-ui, sans-serif;
+  background: #f1f5f9;
+}
+
+/* Navbar */
+.navbar-header {
+  background: #fff;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-link-btn {
+  color: #64748b;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+.nav-link-btn:hover,
+.nav-link-btn.active {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Main Card */
+.portal-card {
+  background: #fff;
+  max-width: 880px;
+  margin: 32px auto;
+  padding: 32px;
+  text-align: center;
+}
+
+/* Button */
+.portal-btn-primary {
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.portal-btn-primary:hover { background: #1d4ed8; }
+
+/* Details Rows */
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+.details-label { color: #64748b; }
+.details-value { font-weight: 700; }
+
+/* Feature Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.feature-box {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .portal-card { padding: 24px 16px; }
+}`,
+
     // ── SECTION: MongoDB Cmds ────────────────────────────────────────────────
 
     // M1. Show Databases
