@@ -326,55 +326,52 @@ function App() {
 export default App`,
 
     // 32. App.css (Registration Form)
-    `*{
-  padding:0;
-  margin:0;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    `* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Gill Sans', sans-serif;
 }
-.main{
-  width:100vw;
-  height:100vh;
+
+.main {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   background-color: #7681ff;
-  gap:10px;
+  gap: 10px;
 }
-.App{
-  color:rgb(0, 0, 0);
+
+.App {
   background-color: #f9f8f8;
-  display: flex;
-  justify-content: center;
-  align-items: space-around;
   padding: 20px;
   border-radius: 10px;
 }
-form{
+
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap:20px;
-  width:300px;
-  height:400px;
+  gap: 15px;
+  width: 300px;
+  height: 400px;
 }
-.heading{
-  font-size: 20px;
-  font-weight: bold;
-}
-.input-field{
+
+.heading { font-size: 20px; font-weight: bold; }
+
+.input-field {
   width: 250px;
-  height:30px;
+  height: 35px;
   border-radius: 5px;
   border: 1px solid #7a7a7a;
   padding-left: 10px;
 }
-.checkbox{
-  margin-right: 10px;
-}
-button{
+
+.checkbox { margin-right: 10px; }
+
+button {
   width: 150px;
   height: 35px;
   border-radius: 5px;
@@ -384,8 +381,9 @@ button{
   font-weight: bold;
   cursor: pointer;
 }
-.side-text{
-  color:white;
+
+.side-text {
+  color: white;
   font-weight: bold;
   font-size: 50px;
   text-align: center;
@@ -429,73 +427,86 @@ export default function App() {
     // 37. App.css (React Router)
     `:root {
   --blue: #2563eb;
-  --white: #ffffff;
   --bg: #f1f5f9;
   --text: #0f172a;
   --muted: #64748b;
   --border: #e2e8f0;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
 
-.navbar-header { background: var(--white); border-bottom: 1px solid var(--border); }
-.navbar-container {
-  max-width: 1100px; margin: auto; padding: 0 24px; height: 62px;
-  display: flex; align-items: center; justify-content: space-between;
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-.brand-section { display: flex; align-items: center; gap: 10px; }
-.brand-icon-box {
-  width: 34px; height: 34px; border-radius: 8px;
-  background: var(--blue); color: #fff;
-  display: flex; align-items: center; justify-content: center;
+
+.navbar-header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.brand-title { font-size: 17px; font-weight: 700; }
-.nav-menu { display: flex; gap: 6px; }
+
 .nav-link-btn {
-  text-decoration: none; font-size: 14px; color: var(--muted);
-  padding: 7px 16px; border-radius: 999px; transition: 0.2s;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 20px;
 }
-.nav-link-btn:hover, .nav-link-btn.active { background: #eff6ff; color: var(--blue); font-weight: 600; }
+.nav-link-btn:hover, .nav-link-btn.active {
+  background: #eff6ff;
+  color: var(--blue);
+  font-weight: 600;
+}
 
-.app-layout { min-height: 100vh; display: flex; flex-direction: column; }
-.main-wrapper { flex: 1; display: flex; justify-content: center; padding: 32px 16px; }
 .portal-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
-  width: 100%; max-width: 880px; padding: 36px 32px;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 880px;
+  margin: 32px auto;
+  padding: 32px;
+  text-align: center;
 }
 
-.home-heading, .about-heading { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
-.about-summary { font-size: 14px; color: var(--muted); max-width: 620px; line-height: 1.6; margin-bottom: 24px; }
-.gov-badge {
-  background: #eff6ff; border: 1px solid #bfdbfe; color: var(--blue);
-  padding: 5px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 14px;
-}
-.image-frame { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 24px; }
-.college-photo { width: 100%; max-height: 400px; object-fit: cover; display: block; }
 .portal-btn-primary {
-  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
-  background: var(--blue); color: #fff; padding: 10px 22px;
-  border-radius: 8px; font-size: 14px; font-weight: 600; transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  background: var(--blue);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
 }
-.portal-btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+.portal-btn-primary:hover { background: #1d4ed8; }
 
-.details-container {
-  width: 100%; max-width: 640px; background: #f8fafc;
-  border: 1px solid #edf2f7; border-radius: 10px;
-  padding: 4px 20px; margin-bottom: 24px; text-align: left;
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
 }
-.details-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 13.5px; }
-.details-row:last-child { border-bottom: none; }
 .details-label { color: var(--muted); }
 .details-value { font-weight: 700; }
-.details-link { color: var(--blue); font-weight: 600; }
 
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; max-width: 760px; margin-bottom: 24px; text-align: left; }
-.feature-box { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
-.feature-icon-wrapper { font-size: 20px; margin-bottom: 10px; }
-.feature-title { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
-.feature-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.feature-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: left;
+}
 
 @media (max-width: 700px) {
   .cards-grid { grid-template-columns: 1fr; }
@@ -652,86 +663,6 @@ export default function Contact() {
 
     // 47. Run Development Server
     `npm run dev`,
-
-    // 48. App.css (Simplified)
-    `/* Reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* Base */
-body {
-  font-family: system-ui, sans-serif;
-  background: #f1f5f9;
-}
-
-/* Navbar */
-.navbar-header {
-  background: #fff;
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.nav-link-btn {
-  color: #64748b;
-  padding: 6px 14px;
-  border-radius: 20px;
-  text-decoration: none;
-}
-.nav-link-btn:hover,
-.nav-link-btn.active {
-  background: #eff6ff;
-  color: #2563eb;
-  font-weight: 600;
-}
-
-/* Main Card */
-.portal-card {
-  background: #fff;
-  max-width: 880px;
-  margin: 32px auto;
-  padding: 32px;
-  text-align: center;
-}
-
-/* Button */
-.portal-btn-primary {
-  background: #2563eb;
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-}
-.portal-btn-primary:hover { background: #1d4ed8; }
-
-/* Details Rows */
-.details-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #e2e8f0;
-}
-.details-label { color: #64748b; }
-.details-value { font-weight: 700; }
-
-/* Feature Cards Grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-.feature-box {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 18px;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-  .cards-grid { grid-template-columns: 1fr; }
-  .portal-card { padding: 24px 16px; }
-}`,
 
     // ── SECTION: MongoDB Cmds ────────────────────────────────────────────────
 
