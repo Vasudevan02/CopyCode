@@ -838,7 +838,7 @@ export default function Contact() {
       if (targetId === 'git-commands') {
         pageTitle.textContent = 'Git Commands';
       } else if (targetId === 'simple-reg-form') {
-        pageTitle.textContent = 'Simple Registration Form (HTML Inline)';
+        pageTitle.textContent = 'Simple Registration Form using HTML, CSS, JS';
       } else if (targetId === 'feedback-form') {
         pageTitle.textContent = 'Feedback Form (HTML Inline)';
       } else if (targetId === 'simple-ts-program') {
