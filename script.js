@@ -60,70 +60,75 @@
     // 18. Pull from GitHub
     `git pull`,
 
-    // ── SECTION 2: Simple Reg Form (index 19) ───────────────────────────────
+    // ── SECTION 2: Simple Reg Form (index 19 = HTML, 19b = CSS, 19c = JS) ───
 
-    // 19. Simple Registration Form (HTML Inline)
+    // 19a. Simple Reg Form — index.html
     `<!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: sans-serif;
-        background: #f7f8fc;
-      }
-      form {
-        background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        width: 280px;
-      }
-      p {
-        margin: 0 0 15px 0;
-      }
-      input {
-        width: 100%;
-        padding: 6px;
-        border: 1px solid #767676;
-        border-radius: 2px;
-        box-sizing: border-box;
-        margin-top: 5px;
-      }
-      button {
-        width: 100%;
-        padding: 10px;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form
-      onsubmit="
-        event.preventDefault();
-        alert('Registration Successful!');
-        this.reset();
-      "
-    >
-      <h2 style="margin: 0 0 20px 0">Register</h2>
-      <p>Username:<br /><input type="text" required /></p>
-      <p>Email:<br /><input type="email" required /></p>
-      <p>Password:<br /><input type="password" required /></p>
+    <form id="regForm">
+      <h2>Register</h2>
+      <p>Username:<br /><input type="text" id="username" required /></p>
+      <p>Email:<br /><input type="email" id="email" required /></p>
+      <p>Password:<br /><input type="password" id="password" required /></p>
       <button type="submit">Sign Up</button>
     </form>
+    <script src="script.js"></script>
   </body>
 </html>`,
+
+    // 19b. Simple Reg Form — style.css
+    `body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+  background: #f7f8fc;
+}
+form {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 280px;
+}
+p {
+  margin: 0 0 15px 0;
+}
+input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #767676;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}`,
+
+    // 19c. Simple Reg Form — script.js
+    `document.getElementById('regForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  alert('Registration Successful!');
+  this.reset();
+});`,
 
     // ── SECTION 3: Feedback Form (index 20) ─────────────────────────────────
 
