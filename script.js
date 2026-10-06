@@ -693,15 +693,8 @@ export default function Contact() {
 
     // M8. 8. Insert Many Documents
     `db.students.insertMany([
-  { name: "Aditya Y P", rgno: "197CS25701", age: 19 },
-  { name: "Aditya Y N", rgno: "197CS25703", age: 19 },
-  { name: "Nithish K",  rgno: "197CS54021", age: 18 },
-  { name: "Mallikarjun", rgno: "197CS24019", age: 21 },
-  { name: "Goutham E",  rgno: "197CS2408",  age: 21 },
-  { name: "Gururaj K P", rgno: "197CCS2409", age: 18 },
-  { name: "Chiranth",   rgno: "197CS2404",  age: 18 },
-  { name: "Saanvi",     rgno: "197CS24042", age: 19 },
-  { name: "Aanya",      rgno: "197CS24049", age: 18 }
+  { name: "Nithish K", rgno: "197CS54021", age: 18 },
+  { name: "Goutham E", rgno: "197CS2408", age: 21 }
 ])`,
 
     // M9. 9. Find by rgno
