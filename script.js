@@ -778,10 +778,7 @@ db.students.createIndex({ name: 1 });`,
   age INT
 );`,
 
-    // SQL6. 6. Describe Table Structure
-    `DESC students;`,
-
-    // SQL7. 7. Insert Table Values
+    // SQL6. 6. Insert Table Values
     `INSERT INTO students (id, std_name, rgno, age) VALUES
 (2, 'Nithish K', '197CS24031', 18),
 (4, 'Nanda Kumar Y D', '197CS25709', 19),
@@ -789,7 +786,7 @@ db.students.createIndex({ name: 1 });`,
 (1, 'Jeevan A O', '197CS24015', 21),
 (5, 'Pavan B C', '197CS24032', 22);`,
 
-    // SQL8. 8. Select All Records
+    // SQL7. 7. Select All Records
     `SELECT * FROM students;`
   ];
 
