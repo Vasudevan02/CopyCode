@@ -754,6 +754,43 @@ db.students.createIndex({ name: 1 });`,
 
     // M26. 26. Drop Database
     `db.dropDatabase();`
+  ,
+
+    // ── SECTION: MySQL Cmds ──────────────────────────────────────────────────
+
+    // SQL1. 1. Show Databases
+    `SHOW DATABASES;`,
+
+    // SQL2. 2. Create Database
+    `CREATE DATABASE college;`,
+
+    // SQL3. 3. Show Databases
+    `SHOW DATABASES;`,
+
+    // SQL4. 4. Use Database
+    `USE college;`,
+
+    // SQL5. 5. Create Students Table
+    `CREATE TABLE students (
+  id INT PRIMARY KEY,
+  std_name VARCHAR(50),
+  rgno VARCHAR(20),
+  age INT
+);`,
+
+    // SQL6. 6. Describe Table Structure
+    `DESC students;`,
+
+    // SQL7. 7. Insert Table Values
+    `INSERT INTO students (id, std_name, rgno, age) VALUES
+(2, 'Nithish K', '197CS24031', 18),
+(4, 'Nanda Kumar Y D', '197CS25709', 19),
+(3, 'Darshan H R', '197CS25706', 20),
+(1, 'Jeevan A O', '197CS24015', 21),
+(5, 'Pavan B C', '197CS24032', 22);`,
+
+    // SQL8. 8. Select All Records
+    `SELECT * FROM students;`
   ];
 
   const cards = document.querySelectorAll('.code-card');
