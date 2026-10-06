@@ -432,14 +432,8 @@ export default function App() {
   --muted: #64748b;
   --border: #e2e8f0;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
+body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
 
 .navbar-header {
   background: #fff;
@@ -449,69 +443,26 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
-.nav-link-btn {
-  text-decoration: none;
-  color: var(--muted);
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-.nav-link-btn:hover, .nav-link-btn.active {
-  background: #eff6ff;
-  color: var(--blue);
-  font-weight: 600;
-}
+.nav-link-btn { text-decoration: none; color: var(--muted); padding: 6px 14px; border-radius: 20px; }
+.nav-link-btn:hover, .nav-link-btn.active { background: #eff6ff; color: var(--blue); font-weight: 600; }
 
 .portal-card {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 14px;
-  max-width: 880px;
-  margin: 32px auto;
-  padding: 32px;
+  border-radius: 12px;
+  max-width: 860px;
+  margin: 28px auto;
+  padding: 28px;
   text-align: center;
 }
-
-.portal-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  background: var(--blue);
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-}
+.portal-btn-primary { display: inline-flex; background: var(--blue); color: #fff; padding: 10px 22px; border-radius: 8px; font-weight: 600; text-decoration: none; }
 .portal-btn-primary:hover { background: #1d4ed8; }
-
-.details-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13.5px;
-}
+.details-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .details-label { color: var(--muted); }
 .details-value { font-weight: 700; }
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-bottom: 24px;
-}
-.feature-box {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px;
-  text-align: left;
-}
-
-@media (max-width: 700px) {
-  .cards-grid { grid-template-columns: 1fr; }
-  .portal-card { padding: 24px 16px; }
-}`,
+.cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+.feature-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: left; }
+@media (max-width: 700px) { .cards-grid { grid-template-columns: 1fr; } .portal-card { padding: 20px 14px; } }`,
 
     // 38. main.jsx (React Router)
     `import { StrictMode } from 'react'
@@ -535,36 +486,12 @@ createRoot(document.getElementById('root')).render(
     `import React from "react";
 import { Link } from "react-router-dom";
 
-const info = [
-  ["Institution Name", "Government Polytechnic, Kadur"],
-  ["Affiliation & Recognition", "DTE Karnataka & AICTE Approved"],
-  ["Inaugurated By", "Dr. M. C. Sudhakar"],
-  ["Official Portal", "gpt.karnataka.gov.in/gptkadur", true],
-];
-
-const cards = [
-  { icon: "📱", title: "Academics & Admissions", desc: "Offering diploma programs across odd and even semesters, 1st year induction programs, and lateral entry opportunities." },
-  { icon: "📄", title: "Circulars & Regulatory", desc: "Transparent public administration in compliance with AICTE standards, RTI guidelines, exam updates, and official government circulars." },
-  { icon: "⭐", title: "Activities & Co-Curricular", desc: "Active student life featuring technical industrial visits, community Shramadana initiatives, annual sports meets, and cultural events." },
-];
-
 export default function About() {
   return (
     <div className="portal-card">
-      <div className="gov-badge">❖ Govt. of Karnataka · Dept. of Technical Education</div>
-      <h1 className="about-heading">About Government Polytechnic, Kadur</h1>
-      <p className="about-summary">Government Polytechnic Kadur is a premier state technical institution approved by AICTE, committed to imparting high-standard diploma engineering education and skill development in Karnataka.</p>
-      <div className="details-container">
-        {info.map(([k, v, isLink]) => (
-          <div key={k} className="details-row"><span className="details-label">{k}</span><span className={isLink ? "details-link" : "details-value"}>{v}</span></div>
-        ))}
-      </div>
-      <div className="cards-grid">
-        {cards.map((c) => (
-          <div key={c.title} className="feature-box"><div className="feature-icon-wrapper">{c.icon}</div><h3 className="feature-title">{c.title}</h3><p className="feature-desc">{c.desc}</p></div>
-        ))}
-      </div>
-      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+      <h1>About Government Polytechnic, Kadur</h1>
+      <p>A premier AICTE-approved state technical institution in Karnataka.</p>
+      <Link to="/" className="portal-btn-primary">⌂ Home</Link>
     </div>
   );
 }`,
@@ -598,32 +525,15 @@ export default function Home() {
     `import React from "react";
 import { NavLink } from "react-router-dom";
 
-const navItems = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About Us" },
-  { path: "/contact", label: "Contact" },
-];
-
 export default function Navbar() {
   return (
     <header className="navbar-header">
-      <div className="navbar-container">
-        <div className="brand-section">
-          <div className="brand-icon-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.5L4.5 9 12 4.9 19.5 9 12 11.5zM6 12.35v3.82c0 2.21 2.69 4 6 4s6-1.79 6-4v-3.82l-6 3.27-6-3.27z"/>
-            </svg>
-          </div>
-          <span className="brand-title">GP Kadur Portal</span>
-        </div>
-        <nav className="nav-menu">
-          {navItems.map((item) => (
-            <NavLink key={item.path} to={item.path} className={({ isActive }) => (isActive ? "nav-link-btn active" : "nav-link-btn")}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
+      <span className="brand-title">GP Kadur Portal</span>
+      <nav>
+        <NavLink to="/" className={({ isActive }) => isActive ? "nav-link-btn active" : "nav-link-btn"}>Home</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link-btn active" : "nav-link-btn"}>About</NavLink>
+        <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link-btn active" : "nav-link-btn"}>Contact</NavLink>
+      </nav>
     </header>
   );
 }`,
@@ -635,28 +545,14 @@ export default function Navbar() {
     `import React from "react";
 import { Link } from "react-router-dom";
 
-const contactData = [
-  { icon: "📍", label: "Address", val: "Kadur - Birur Bypass Road, Kadur, Karnataka 577548" },
-  { icon: "📞", label: "Phone", val: "+91 8267 221234 / 221235" },
-  { icon: "✉️", label: "Email", val: "gptkadur.principal@karnataka.gov.in" },
-  { icon: "⏰", label: "Office Timings", val: "Monday to Saturday, 9:00 AM – 5:00 PM" },
-];
-
 export default function Contact() {
   return (
     <div className="portal-card">
-      <div className="gov-badge">📞 Helpdesk & Inquiries</div>
-      <h1 className="about-heading">Contact Us</h1>
-      <p className="about-summary">Reach out to Government Polytechnic, Kadur administration for admissions, document verification, and academic support.</p>
-      <div className="details-container">
-        {contactData.map((item) => (
-          <div key={item.label} className="details-row">
-            <span className="details-label">{item.icon} {item.label}</span>
-            <span className="details-value">{item.val}</span>
-          </div>
-        ))}
-      </div>
-      <Link to="/" className="portal-btn-primary"><span>⌂</span> Go to Home Page</Link>
+      <h1>Contact Us</h1>
+      <p>📍 Kadur - Birur Bypass Road, Kadur, Karnataka 577548</p>
+      <p>📞 +91 8267 221234 / 221235</p>
+      <p>✉️ gptkadur.principal@karnataka.gov.in</p>
+      <Link to="/" className="portal-btn-primary">⌂ Home</Link>
     </div>
   );
 }`,
