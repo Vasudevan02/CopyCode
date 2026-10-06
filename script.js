@@ -664,28 +664,34 @@ export default function Contact() {
     // 47. Run Development Server
     `npm run dev`,
 
-    // ── SECTION: MongoDB Cmds ────────────────────────────────────────────────
+        // ── SECTION: MongoDB Cmds ────────────────────────────────────────────────
 
-    // M1. Show Databases
+    // M1. 1. Show Databases
     `show dbs`,
 
-    // M2. Use Database
+    // M2. 2. Drop Database
+    `db.dropDatabase();`,
+
+    // M3. 3. Use Database
     `use college`,
 
-    // M3. Create Collection
+    // M4. 4. Create Collection
     `db.createCollection("students")`,
 
-    // M4. Insert One Document
+    // M5. 5. Drop Collection
+    `db.students.drop();`,
+
+    // M6. 6. Insert One Document
     `db.students.insertOne({
   name: "Pavan B C",
   rgno: "197CS24020",
   age: 22
 })`,
 
-    // M5. Find All Documents
+    // M7. 7. Find All Documents
     `db.students.find();`,
 
-    // M6. Insert Many Documents
+    // M8. 8. Insert Many Documents
     `db.students.insertMany([
   { name: "Aditya Y P", rgno: "197CS25701", age: 19 },
   { name: "Aditya Y N", rgno: "197CS25703", age: 19 },
@@ -698,32 +704,63 @@ export default function Contact() {
   { name: "Aanya",      rgno: "197CS24049", age: 18 }
 ])`,
 
-    // M7. Find by rgno
+    // M9. 9. Find by rgno
     `db.students.find({ rgno: "197CS24020" });`,
 
-    // M8. Find by Age
+    // M10. 10. Find by Age
     `db.students.find({ age: 18 });`,
 
-    // M9. Find Age Greater Than 20
-    `db.students.find({ age: { $gt: 20 } });`,
-
-    // M10. Update One Document
+    // M11. 11. Update One Document
     `db.students.updateOne(
   { name: "Goutham E" },
   { $set: { rgno: "197CS24080" } }
 );`,
 
-    // M11. Find Updated Document
+    // M12. 12. Find Updated Document
     `db.students.find({ rgno: "197CS24080" });`,
 
-    // M12. Delete One Document
+    // M13. 13. Delete One Document
     `db.students.deleteOne({ rgno: "197CS54021" });`,
 
-    // M13. Verify Deletion
+    // M14. 14. Verify Deletion
     `db.students.find({ rgno: "197CS54021" });`,
 
-    // M14. Find All (Final)
-    `db.students.find();`
+    // M15. 15. Find All Documents
+    `db.students.find();`,
+
+    // M16. 16. Create Index (Age & Name)
+    `db.students.createIndex({ age: 1 });
+db.students.createIndex({ name: 1 });`,
+
+    // M17. 17. Find Data Using Index
+    `db.students.find({ rgno: "197CS24080" });`,
+
+    // M18. 18. Find Age Exactly 18 ($eq)
+    `db.students.find({ age: { $eq: 18 } });`,
+
+    // M19. 19. Find Age Greater Than 20 ($gt)
+    `db.students.find({ age: { $gt: 20 } });`,
+
+    // M20. 20. Find Age Less Than 21 ($lt)
+    `db.students.find({ age: { $lt: 21 } });`,
+
+    // M21. 21. Find Age Between 18 and 21 ($gte, $lte)
+    `db.students.find({ age: { $gte: 18, $lte: 21 } });`,
+
+    // M22. 22. Filter, Sort and Limit
+    `db.students.find({ age: { $gte: 18, $lte: 21 } }).sort({ age: -1 }).limit(2);`,
+
+    // M23. 23. Sort Youngest to Oldest
+    `db.students.find().sort({ age: 1 });`,
+
+    // M24. 24. Sort Alphabetically (A-Z)
+    `db.students.find().sort({ name: 1 });`,
+
+    // M25. 25. Sort Oldest to Youngest
+    `db.students.find().sort({ age: -1 });`,
+
+    // M26. 26. Set Limit (First 3)
+    `db.students.find().limit(3);`
   ];
 
   const cards = document.querySelectorAll('.code-card');
