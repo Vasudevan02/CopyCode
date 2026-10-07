@@ -631,44 +631,9 @@ db.students.createIndex({ name: 1 });`,
 (5, 'Pavan B C', '197CS24032', 22);`,
 
     // SQL7. 7. Select All Records
-    `SELECT * FROM students;`
-  ];
+    `SELECT * FROM students;`,
 
-  const cards = document.querySelectorAll('.code-card');
-
-  function calculateCardHeights() {
-    requestAnimationFrame(() => {
-      cards.forEach(card => {
-        const codeBlock = card.querySelector('.code-content');
-        const preBlock = card.querySelector('pre');
-        const lineNumbers = card.querySelector('.line-numbers');
-        if (lineNumbers && codeBlock) {
-          const fullHeight = Math.max(
-            lineNumbers.scrollHeight,
-            preBlock ? preBlock.scrollHeight : 0,
-            codeBlock.scrollHeight
-          );
-          if (fullHeight > 0) {
-            lineNumbers.style.minHeight = `${fullHeight}px`;
-          }
-        }
-      });
-    });
-  }
-
-  cards.forEach((card, index) => {
-    const codeBlock = card.querySelector('.code-content');
-    const lineNumbers = card.querySelector('.line-numbers');
-    const copyBtn = card.querySelector('.btn-copy');
-    const copyIcon = card.querySelector('.copy-icon');
-    const checkIcon = card.querySelector('.check-icon');
-    const btnText = card.querySelector('.btn-text');
-
-    // Populate pure text if snippet is defined
-    if (codeSnippets[index] && codeBlock) {
-      codeBlock.textContent = codeSnippets[index
-
-    // ── SECTION: Spring Boot Employee Project ───────────────────────────────
+    // ── SECTION: Spring Boot Employee Project ───────────────────────────
 
     // SB1. Create Database
     `CREATE DATABASE factory;
@@ -814,7 +779,41 @@ SELECT * FROM employ;
 
 -- Result:
 -- 101 | Nithish | Director | 50000`
-];
+  ];
+
+  const cards = document.querySelectorAll('.code-card');
+
+  function calculateCardHeights() {
+    requestAnimationFrame(() => {
+      cards.forEach(card => {
+        const codeBlock = card.querySelector('.code-content');
+        const preBlock = card.querySelector('pre');
+        const lineNumbers = card.querySelector('.line-numbers');
+        if (lineNumbers && codeBlock) {
+          const fullHeight = Math.max(
+            lineNumbers.scrollHeight,
+            preBlock ? preBlock.scrollHeight : 0,
+            codeBlock.scrollHeight
+          );
+          if (fullHeight > 0) {
+            lineNumbers.style.minHeight = `${fullHeight}px`;
+          }
+        }
+      });
+    });
+  }
+
+  cards.forEach((card, index) => {
+    const codeBlock = card.querySelector('.code-content');
+    const lineNumbers = card.querySelector('.line-numbers');
+    const copyBtn = card.querySelector('.btn-copy');
+    const copyIcon = card.querySelector('.copy-icon');
+    const checkIcon = card.querySelector('.check-icon');
+    const btnText = card.querySelector('.btn-text');
+
+    // Populate pure text if snippet is defined
+    if (codeSnippets[index] && codeBlock) {
+      codeBlock.textContent = codeSnippets[index];
     }
 
     // Generate matching line numbers and enforce continuous height
