@@ -666,7 +666,155 @@ db.students.createIndex({ name: 1 });`,
 
     // Populate pure text if snippet is defined
     if (codeSnippets[index] && codeBlock) {
-      codeBlock.textContent = codeSnippets[index];
+      codeBlock.textContent = codeSnippets[index
+
+    // ── SECTION: Spring Boot Employee Project ───────────────────────────────
+
+    // SB1. Create Database
+    `CREATE DATABASE factory;
+
+USE factory;`,
+
+    // SB2. Spring Initializr Setup
+    `Project:  Maven
+Language: Java
+Packaging: Jar
+Java: 17 or 21
+
+Dependencies:
+- Spring Web
+- Spring Data JPA
+- MySQL Driver
+
+Generate → Open in Eclipse / STS`,
+
+    // SB3. Package Structure
+    `com.example.dbproj
+│
+├── entity
+├── repo
+└── controller`,
+
+    // SB4. Employ.java (Entity)
+    `package com.example.dbproj.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "employ")
+public class Employ {
+
+    @Id
+    private int empno;
+
+    @Column(name = "ename")  private String ename;
+    @Column(name = "job")    private String job;
+    @Column(name = "salary") private String salary;
+
+    public int    getEmpno()  { return empno; }
+    public void   setEmpno(int empno) { this.empno = empno; }
+    public String getEname()  { return ename; }
+    public void   setEname(String ename) { this.ename = ename; }
+    public String getJob()    { return job; }
+    public void   setJob(String job) { this.job = job; }
+    public String getSalary() { return salary; }
+    public void   setSalary(String salary) { this.salary = salary; }
+}`,
+
+    // SB5. application.properties
+    `spring.datasource.url=jdbc:mysql://localhost:3306/factory
+spring.datasource.username=root
+spring.datasource.password=123
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# Replace 123 with your actual MySQL password`,
+
+    // SB6. EmployRepo.java
+    `package com.example.dbproj.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.dbproj.entity.Employ;
+
+public interface EmployRepo extends JpaRepository<Employ, Integer> {
+
+}`,
+
+    // SB7. FactoryController.java
+    `package com.example.dbproj.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.example.dbproj.entity.Employ;
+import com.example.dbproj.repo.EmployRepo;
+
+@RestController
+public class FactoryController {
+
+    @Autowired
+    EmployRepo repo;
+
+    @PostMapping("/newemploy")
+    public void saveEmploy(@RequestBody Employ emp) {
+        repo.save(emp);
+    }
+}`,
+
+    // SB8. Main Class
+    `package com.example.dbproj;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DbprojApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DbprojApplication.class, args);
+    }
+}`,
+
+    // SB9. Run the Project
+    `Right-click project / main class
+→ Run As
+→ Spring Boot App
+
+Wait for:
+Tomcat started on port 8080`,
+
+    // SB10. Check MySQL Table
+    `USE factory;
+
+SHOW TABLES;
+-- Result: employ
+
+DESC employ;
+-- Columns: empno | ename | job | salary`,
+
+    // SB11. Open Postman
+    `Method : POST
+URL    : http://localhost:8080/newemploy
+
+Body → raw → JSON`,
+
+    // SB12. Employee JSON Body
+    `{
+    "empno": 101,
+    "ename": "Nithish",
+    "job": "Director",
+    "salary": "50000"
+}`,
+
+    // SB13. Check Data in MySQL
+    `USE factory;
+
+SELECT * FROM employ;
+
+-- Result:
+-- 101 | Nithish | Director | 50000`
+];
     }
 
     // Generate matching line numbers and enforce continuous height
