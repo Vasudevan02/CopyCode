@@ -1,0 +1,13 @@
+﻿// Section: Feedback Form
+window.SECTIONS_DATA = window.SECTIONS_DATA || {};
+window.SECTIONS_DATA['feedback-form'] = {
+    "title":  "Feedback Form",
+    "cards":  [
+                  {
+                      "code":  "\u003c!doctype html\u003e\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n  \u003ctitle\u003eFeedback\u003c/title\u003e\r\n  \u003cstyle\u003e\r\n    body { display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; font-family:sans-serif; background:#f7f8fc; }\r\n    form { background:#fff; padding:28px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.05); width:300px; }\r\n    h2 { margin:0 0 16px; }\r\n    p { margin:0 0 12px; }\r\n    input, textarea, select { width:100%; padding:6px; border:1px solid #767676; border-radius:2px; box-sizing:border-box; margin-top:4px; font-family:sans-serif; }\r\n    textarea { resize:vertical; height:80px; }\r\n    button { width:100%; padding:10px; background:#28a745; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:8px; }\r\n  \u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n  \u003cform onsubmit=\"event.preventDefault();alert(\u0027Thank you for your feedback!\u0027);this.reset();\"\u003e\r\n    \u003ch2\u003eFeedback Form\u003c/h2\u003e\r\n    \u003cp\u003eName:\u003cbr\u003e\u003cinput type=\"text\" placeholder=\"Your name\" required\u003e\u003c/p\u003e\r\n    \u003cp\u003eEmail:\u003cbr\u003e\u003cinput type=\"email\" placeholder=\"Your email\" required\u003e\u003c/p\u003e\r\n    \u003cp\u003eRating:\u003cbr\u003e\r\n      \u003cselect required\u003e\r\n        \u003coption value=\"\"\u003e-- Select Rating --\u003c/option\u003e\r\n        \u003coption value=\"5\"\u003eâ­â­â­â­â­ Excellent\u003c/option\u003e\r\n        \u003coption value=\"4\"\u003eâ­â­â­â­ Good\u003c/option\u003e\r\n        \u003coption value=\"3\"\u003eâ­â­â­ Average\u003c/option\u003e\r\n        \u003coption value=\"2\"\u003eâ­â­ Poor\u003c/option\u003e\r\n        \u003coption value=\"1\"\u003eâ­ Very Poor\u003c/option\u003e\r\n      \u003c/select\u003e\r\n    \u003c/p\u003e\r\n    \u003cp\u003eMessage:\u003cbr\u003e\u003ctextarea placeholder=\"Write your feedback here...\" required\u003e\u003c/textarea\u003e\u003c/p\u003e\r\n    \u003cbutton type=\"submit\"\u003eSubmit Feedback\u003c/button\u003e\r\n  \u003c/form\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e",
+                      "title":  "Feedback Form (HTML Inline)"
+                  }
+              ],
+    "id":  "feedback-form",
+    "pageTitle":  "Feedback Form (HTML Inline)"
+};
