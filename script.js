@@ -651,17 +651,18 @@ Dependencies:
 - Spring Data JPA
 - MySQL Driver
 
-Generate → Open in Eclipse / STS`,
+Artifact: dipdb
+Generate → Open in Eclipse / STS``,
 
     // SB3. Package Structure
-    `com.example.dbproj
+    `com.example.dipdb
 │
-├── entity
-├── repo
-└── controller`,
+├── Entity
+├── Repo
+└── Controller``,
 
     // SB4. Employ.java (Entity)
-    `package com.example.dbproj.entity;
+    `package com.example.dipdb.Entity;
 
 import jakarta.persistence.*;
 
@@ -672,22 +673,50 @@ public class Employ {
     @Id
     private int empno;
 
-    @Column(name = "ename")  private String ename;
-    @Column(name = "job")    private String job;
-    @Column(name = "salary") private String salary;
+    @Column(name = "ename")
+    private String ename;
+    @Column(name = "job")
+    private String job;
+    @Column(name = "salary")
+    private String salary;
 
-    public int    getEmpno()  { return empno; }
-    public void   setEmpno(int empno) { this.empno = empno; }
-    public String getEname()  { return ename; }
-    public void   setEname(String ename) { this.ename = ename; }
-    public String getJob()    { return job; }
-    public void   setJob(String job) { this.job = job; }
-    public String getSalary() { return salary; }
-    public void   setSalary(String salary) { this.salary = salary; }
-}`,
+    public int getEmpno() {
+        return empno;
+    }
+
+    public void setEmpno(int empno) {
+        this.empno = empno;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+}``,
 
     // SB5. application.properties
-    `spring.datasource.url=jdbc:mysql://localhost:3306/factory
+    `spring.application.name=dipdb
+
+spring.datasource.url=jdbc:mysql://localhost:3306/factory
 spring.datasource.username=root
 spring.datasource.password=123
 
@@ -695,51 +724,52 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
-# Replace 123 with your actual MySQL password`,
+# Replace 123 with your actual MySQL password``,
 
     // SB6. EmployRepo.java
-    `package com.example.dbproj.repo;
+    `package com.example.dipdb.Repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.dbproj.entity.Employ;
+import com.example.dipdb.Entity.Employ;
 
 public interface EmployRepo extends JpaRepository<Employ, Integer> {
 
-}`,
+}``,
 
     // SB7. FactoryController.java
-    `package com.example.dbproj.controller;
+    `package com.example.dipdb.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.dbproj.entity.Employ;
-import com.example.dbproj.repo.EmployRepo;
+import com.example.dipdb.Entity.Employ;
+import com.example.dipdb.Repo.EmployRepo;
 
 @RestController
 public class FactoryController {
 
     @Autowired
-    EmployRepo repo;
+    EmployRepo db;
 
     @PostMapping("/newemploy")
-    public void saveEmploy(@RequestBody Employ emp) {
-        repo.save(emp);
+    public void saveEmploy(@RequestBody Employ obj) {
+        db.save(obj);
     }
-}`,
+}``,
 
     // SB8. Main Class
-    `package com.example.dbproj;
+    `package com.example.dipdb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DbprojApplication {
+public class DipdbApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DbprojApplication.class, args);
+        SpringApplication.run(DipdbApplication.class, args);
     }
-}`,
+
+}``,
 
     // SB9. Run the Project
     `Right-click project / main class
