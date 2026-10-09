@@ -4,38 +4,216 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CopyCode — Developer CheatSheet</title>
-  <link rel="stylesheet" href="style.css?v=33">
+  <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body>
   <div id="root"></div>
 
-  <!-- React 18 & ReactDOM (Local build with CDN fallback) -->
+  <!-- React 18, ReactDOM & Babel Standalone (Local with CDN fallback) -->
   <script src="vendor/react.min.js"></script>
   <script src="vendor/react-dom.min.js"></script>
+  <script src="vendor/babel.min.js"></script>
   <script>
     if (!window.React) {
       document.write('<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"><\/script>');
       document.write('<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"><\/script>');
     }
+    if (!window.Babel) {
+      document.write('<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>');
+    }
   </script>
 
   <!-- Modular Sidebar Sections -->
-  <script src="sections/git-commands.js?v=33"></script>
-  <script src="sections/simple-reg-form.js?v=33"></script>
-  <script src="sections/feedback-form.js?v=33"></script>
-  <script src="sections/simple-ts-program.js?v=33"></script>
-  <script src="sections/registration.js?v=33"></script>
-  <script src="sections/react-router.js?v=33"></script>
-  <script src="sections/mongodb-cmds.js?v=33"></script>
-  <script src="sections/mysql-cmds.js?v=33"></script>
-  <script src="sections/spring-boot.js?v=33"></script>
+  <script src="sections/git-commands.js?v=34"></script>
+  <script src="sections/simple-reg-form.js?v=34"></script>
+  <script src="sections/feedback-form.js?v=34"></script>
+  <script src="sections/simple-ts-program.js?v=34"></script>
+  <script src="sections/registration.js?v=34"></script>
+  <script src="sections/react-router.js?v=34"></script>
+  <script src="sections/mongodb-cmds.js?v=34"></script>
+  <script src="sections/mysql-cmds.js?v=34"></script>
+  <script src="sections/spring-boot.js?v=34"></script>
 
-  <!-- React Components -->
-  <script src="components/Sidebar.js?v=33"></script>
-  <script src="components/CodeCard.js?v=33"></script>
-  <script src="components/App.js?v=33"></script>
+  <!-- React JSX Components (HTML + JavaScript combined) -->
+  <script type="text/babel">
+    // ── Sidebar Component (JSX) ─────────────────────────────────────────────
+    function Sidebar({ sections, activeSectionId, onSelectSection }) {
+      return (
+        <aside className="sidebar">
+          <div className="sidebar-header">
+            <h2>CheatSheets</h2>
+          </div>
+          <ul className="nav-list">
+            {sections.map((section) => (
+              <li
+                key={section.id}
+                className={`nav-item ${activeSectionId === section.id ? 'active' : ''}`}
+                onClick={() => onSelectSection(section.id)}
+              >
+                {section.title}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      );
+    }
 
-  <!-- Main Application Entry Point -->
-  <script src="main.js?v=33"></script>
+    // ── CodeCard Component (JSX) ───────────────────────────────────────────
+    function CodeCard({ title, code }) {
+      const [copied, setCopied] = React.useState(false);
+
+      const handleCopy = async () => {
+        const textToCopy = code || '';
+        let success = false;
+
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(textToCopy);
+            success = true;
+          } catch (err) {}
+        }
+
+        if (!success) {
+          try {
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-9999px';
+            textarea.style.left = '-9999px';
+            textarea.setAttribute('readonly', '');
+            document.body.appendChild(textarea);
+            textarea.select();
+            success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+          } catch (e) {
+            console.error('Copy failed:', e);
+          }
+        }
+
+        if (success) {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1800);
+        }
+      };
+
+      const lines = (code || '').split('\n');
+
+      return (
+        <div className="code-card">
+          <div className="code-toolbar">
+            <div className="left-section">
+              <div className="window-dots" aria-hidden="true">
+                <span className="dot dot-red"></span>
+                <span className="dot dot-yellow"></span>
+                <span className="dot dot-green"></span>
+              </div>
+              <span className="file-name">{title}</span>
+            </div>
+            <button
+              className={`btn btn-copy ${copied ? 'copied' : ''}`}
+              type="button"
+              onClick={handleCopy}
+              aria-label={`Copy ${title}`}
+            >
+              <svg
+                className="btn-icon copy-icon"
+                viewBox="0 0 24 24"
+                style={{ display: copied ? 'none' : 'inline-block' }}
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg
+                className="btn-icon check-icon"
+                viewBox="0 0 24 24"
+                style={{ display: copied ? 'inline-block' : 'none' }}
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span className="btn-text">{copied ? 'Copied!' : 'Copy'}</span>
+            </button>
+          </div>
+
+          <div className="code-body">
+            <div className="line-numbers" aria-hidden="true">
+              {lines.map((_, i) => (
+                <span key={i}>{i + 1}</span>
+              ))}
+            </div>
+            <pre>
+              <code className="code-content">{code}</code>
+            </pre>
+          </div>
+        </div>
+      );
+    }
+
+    // ── App Component (JSX) ────────────────────────────────────────────────
+    function App({ sections }) {
+      const [activeSectionId, setActiveSectionId] = React.useState(
+        sections[0] ? sections[0].id : ''
+      );
+
+      const activeSection = sections.find((s) => s.id === activeSectionId) || sections[0];
+
+      const handleSelectSection = (id) => {
+        setActiveSectionId(id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      return (
+        <div className="layout-wrapper">
+          <Sidebar
+            sections={sections}
+            activeSectionId={activeSectionId}
+            onSelectSection={handleSelectSection}
+          />
+          <div className="container">
+            {activeSection && (
+              <header className="page-header">
+                <h1 id="page-title">{activeSection.pageTitle}</h1>
+              </header>
+            )}
+            {activeSection && (
+              <div className="code-section">
+                {activeSection.cards.map((card, idx) => (
+                  <CodeCard
+                    key={`${activeSection.id}-${idx}`}
+                    title={card.title}
+                    code={card.code}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // ── App Mount ──────────────────────────────────────────────────────────
+    (function init() {
+      const sectionIds = [
+        'git-commands',
+        'simple-reg-form',
+        'feedback-form',
+        'simple-ts-program',
+        'registration',
+        'react-router',
+        'mongodb-cmds',
+        'mysql-cmds',
+        'spring-boot'
+      ];
+
+      const sections = sectionIds
+        .map((id) => (window.SECTIONS_DATA && window.SECTIONS_DATA[id]) || null)
+        .filter(Boolean);
+
+      const rootElement = document.getElementById('root');
+      if (rootElement && window.ReactDOM) {
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App sections={sections} />);
+      }
+    })();
+  </script>
 </body>
 </html>
