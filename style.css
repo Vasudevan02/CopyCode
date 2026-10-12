@@ -33,7 +33,7 @@ html, body {
   font-family: var(--font-sans);
 }
 
-/* ── Full-Width Responsive Layout ─────────────────────────────────────────── */
+/* ── Layout Wrapper ───────────────────────────────────────────────────────── */
 .layout-wrapper {
   display: flex;
   width: 100%;
@@ -41,7 +41,7 @@ html, body {
   position: relative;
 }
 
-/* ── Fixed Sidebar (Always Pinned, Never Scroller Gap) ────────────────────── */
+/* ── Fixed Sidebar (Always Pinned, Never Gap) ────────────────────────────── */
 .sidebar {
   position: fixed;
   top: 0;
@@ -120,22 +120,25 @@ html, body {
   background: #484f58;
 }
 
-/* ── Full-Width Main Content Container (Properly Offset from Fixed Sidebar) ─ */
+/* ── Content Container (Offset for Sidebar, Centered Code Snippets) ───────── */
 .container {
   margin-left: 270px;
   width: calc(100% - 270px);
   max-width: calc(100% - 270px);
   min-height: 100vh;
-  padding: 2.25rem 3.5rem 4rem 3.5rem;
+  padding: 2.5rem 2rem 4rem 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centers header and cards in the middle */
   gap: 2rem;
 }
 
-/* ── Header ───────────────────────────────────────────────────────────────── */
+/* ── Centered Header ──────────────────────────────────────────────────────── */
 .page-header {
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+  width: 100%;
+  max-width: 880px;
+  text-align: center;
+  margin-bottom: 0.25rem;
 }
 
 .page-header h1 {
@@ -145,29 +148,29 @@ html, body {
   letter-spacing: -0.02em;
 }
 
-/* ── Code Section & Full-Width Cards ─────────────────────────────────────── */
+/* ── Centered Code Section (Max-Width 880px) ──────────────────────────────── */
 .code-section {
+  width: 100%;
+  max-width: 880px;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  width: 100%;
+  gap: 2.25rem;
 }
 
 .code-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   width: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .code-card:hover {
   border-color: #484f58;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* ── Card Toolbar ─────────────────────────────────────────────────────────── */
@@ -175,7 +178,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 1.25rem;
+  padding: 0.65rem 1rem;
   background-color: var(--header-bg);
   border-bottom: 1px solid var(--border-color);
   gap: 1rem;
@@ -184,7 +187,7 @@ html, body {
 .left-section {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
   min-width: 0;
   overflow: hidden;
 }
@@ -207,12 +210,12 @@ html, body {
 .dot-green { background-color: #27c93f; }
 
 .file-name {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-family: var(--font-mono);
   font-weight: 600;
   color: #79c0ff;
   background: rgba(56, 139, 253, 0.12);
-  padding: 0.25rem 0.7rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 6px;
   border: 1px solid rgba(56, 139, 253, 0.25);
   letter-spacing: 0.02em;
@@ -226,7 +229,7 @@ html, body {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.42rem 0.85rem;
+  padding: 0.4rem 0.8rem;
   font-size: 0.82rem;
   font-weight: 500;
   font-family: var(--font-sans);
@@ -274,7 +277,7 @@ html, body {
   background-color: var(--code-bg);
   display: flex;
   align-items: stretch;
-  max-height: 560px;
+  max-height: 520px;
   overflow: auto;
   width: 100%;
 }
@@ -283,11 +286,11 @@ html, body {
   position: sticky;
   left: 0;
   z-index: 2;
-  padding: 1rem 0.85rem 1rem 1rem;
+  padding: 1rem 0.75rem 1rem 1rem;
   text-align: right;
   color: #484f58;
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   user-select: none;
   border-right: 1px solid rgba(48, 54, 61, 0.6);
   background-color: var(--gutter-bg);
@@ -306,10 +309,10 @@ pre {
   flex: 1;
   width: 100%;
   margin: 0;
-  padding: 1rem 1.4rem;
+  padding: 1rem 1.25rem;
   overflow: visible;
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: #e6edf3;
   tab-size: 2;
   white-space: pre;
@@ -322,7 +325,7 @@ code {
   line-height: var(--code-line-height);
 }
 
-/* ── Code Area Scrollbars ─────────────────────────────────────────────────── */
+/* ── Scrollbars ───────────────────────────────────────────────────────────── */
 .code-body::-webkit-scrollbar {
   height: 8px;
   width: 8px;
@@ -339,12 +342,6 @@ code {
 }
 
 /* ── Responsive Screen Fitting ────────────────────────────────────────────── */
-@media (min-width: 1600px) {
-  .container {
-    padding: 2.5rem 5rem 5rem 5rem;
-  }
-}
-
 @media (max-width: 1024px) {
   .sidebar {
     width: 240px;
@@ -353,7 +350,7 @@ code {
     margin-left: 240px;
     width: calc(100% - 240px);
     max-width: calc(100% - 240px);
-    padding: 2rem 2rem 3rem 2rem;
+    padding: 2rem 1.5rem 3rem 1.5rem;
   }
 }
 
