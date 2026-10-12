@@ -31,7 +31,6 @@ html, body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-sans);
-  overflow-x: hidden;
 }
 
 /* ── Full-Width Responsive Layout ─────────────────────────────────────────── */
@@ -39,24 +38,25 @@ html, body {
   display: flex;
   width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 
-/* ── Sticky Sidebar ───────────────────────────────────────────────────────── */
+/* ── Fixed Sidebar (Always Pinned, Never Scroller Gap) ────────────────────── */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 270px;
-  min-width: 270px;
-  max-width: 270px;
+  height: 100vh;
   background-color: var(--card-bg);
   border-right: 1px solid var(--border-color);
   padding: 1.75rem 1rem;
-  position: sticky;
-  top: 0;
-  height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
 .sidebar-header {
@@ -120,12 +120,12 @@ html, body {
   background: #484f58;
 }
 
-/* ── Full-Width Main Content Container ───────────────────────────────────── */
+/* ── Full-Width Main Content Container (Properly Offset from Fixed Sidebar) ─ */
 .container {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
-  max-width: 100%;
+  margin-left: 270px;
+  width: calc(100% - 270px);
+  max-width: calc(100% - 270px);
+  min-height: 100vh;
   padding: 2.25rem 3.5rem 4rem 3.5rem;
   display: flex;
   flex-direction: column;
@@ -348,9 +348,11 @@ code {
 @media (max-width: 1024px) {
   .sidebar {
     width: 240px;
-    min-width: 240px;
   }
   .container {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    max-width: calc(100% - 240px);
     padding: 2rem 2rem 3rem 2rem;
   }
 }
@@ -361,11 +363,12 @@ code {
   }
 
   .sidebar {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: auto;
     position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 1.25rem 1rem;
@@ -383,6 +386,9 @@ code {
   }
 
   .container {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
     padding: 1.5rem 1rem 3rem 1rem;
     gap: 1.5rem;
   }
