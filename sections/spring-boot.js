@@ -1,4 +1,4 @@
-// Section: Spring Boot Employee Project (Steps 1, 2, 3, 4)
+// Section: Spring Boot Employee Project (Steps 1, 2, 3, 4, 5)
 window.SECTIONS_DATA = window.SECTIONS_DATA || {};
 window.SECTIONS_DATA['spring-boot'] = {
     "id": "spring-boot",
@@ -20,6 +20,10 @@ window.SECTIONS_DATA['spring-boot'] = {
         {
             "title": "4. FactoryController.java",
             "code": "package com.example.dipdb.Controller;\n\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.web.bind.annotation.*;\nimport com.example.dipdb.Entity.Employ;\nimport com.example.dipdb.Repo.EmployRepo;\n\n@RestController\npublic class FactoryController {\n\n    @Autowired\n    EmployRepo db;\n\n    @PostMapping(\"/newemploy\")\n    public void saveEmploy(@RequestBody Employ obj) {\n        db.save(obj);\n    }\n}"
+        },
+        {
+            "title": "5. MySQL Dependency (pom.xml)",
+            "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
         }
     ]
 };
