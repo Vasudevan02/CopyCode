@@ -325,6 +325,16 @@ code {
   line-height: var(--code-line-height);
 }
 
+/* ── Syntax Highlighting Customization ────────────────────────────────────── */
+code.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.hljs {
+  color: #abb2bf;
+}
+
 /* ── Scrollbars ───────────────────────────────────────────────────────────── */
 .code-body::-webkit-scrollbar {
   height: 8px;

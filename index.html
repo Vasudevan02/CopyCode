@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CopyCode — Developer CheatSheet</title>
-  <link rel="stylesheet" href="style.css?v=37">
+  <!-- Syntax Highlighting & Theme Stylesheets -->
+  <link rel="stylesheet" href="vendor/atom-one-dark.min.css?v=38">
+  <link rel="stylesheet" href="style.css?v=38">
 </head>
 <body>
   <div id="root"></div>
@@ -23,16 +25,24 @@
     }
   </script>
 
+  <!-- Highlight.js Syntax Highlighter (Local with CDN fallback) -->
+  <script src="vendor/highlight.min.js"></script>
+  <script>
+    if (!window.hljs) {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"><\/script>');
+    }
+  </script>
+
   <!-- Modular Sidebar Sections -->
-  <script src="sections/git-commands.js?v=34"></script>
-  <script src="sections/simple-reg-form.js?v=34"></script>
-  <script src="sections/feedback-form.js?v=34"></script>
-  <script src="sections/simple-ts-program.js?v=34"></script>
-  <script src="sections/registration.js?v=34"></script>
-  <script src="sections/react-router.js?v=34"></script>
-  <script src="sections/mongodb-cmds.js?v=34"></script>
-  <script src="sections/mysql-cmds.js?v=34"></script>
-  <script src="sections/spring-boot.js?v=37"></script>
+  <script src="sections/git-commands.js?v=38"></script>
+  <script src="sections/simple-reg-form.js?v=38"></script>
+  <script src="sections/feedback-form.js?v=38"></script>
+  <script src="sections/simple-ts-program.js?v=38"></script>
+  <script src="sections/registration.js?v=38"></script>
+  <script src="sections/react-router.js?v=38"></script>
+  <script src="sections/mongodb-cmds.js?v=38"></script>
+  <script src="sections/mysql-cmds.js?v=38"></script>
+  <script src="sections/spring-boot.js?v=38"></script>
 
   <!-- React JSX Components (HTML + JavaScript combined) -->
   <script type="text/babel">
@@ -98,6 +108,17 @@
 
       const lines = (code || '').split('\n');
 
+      const highlightedHtml = React.useMemo(() => {
+        if (window.hljs && code) {
+          try {
+            return window.hljs.highlightAuto(code).value;
+          } catch (err) {
+            console.warn('Highlight failed:', err);
+          }
+        }
+        return null;
+      }, [code]);
+
       return (
         <div className="code-card">
           <div className="code-toolbar">
@@ -141,7 +162,14 @@
               ))}
             </div>
             <pre>
-              <code className="code-content">{code}</code>
+              {highlightedHtml ? (
+                <code
+                  className="code-content hljs"
+                  dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+                />
+              ) : (
+                <code className="code-content">{code}</code>
+              )}
             </pre>
           </div>
         </div>

@@ -40,6 +40,17 @@ function CodeCard({ title, code }) {
 
   const lines = (code || '').split('\n');
 
+  const highlightedHtml = React.useMemo(() => {
+    if (window.hljs && code) {
+      try {
+        return window.hljs.highlightAuto(code).value;
+      } catch (err) {
+        console.warn('Highlight failed:', err);
+      }
+    }
+    return null;
+  }, [code]);
+
   return (
     <div className="code-card">
       <div className="code-toolbar">
@@ -83,7 +94,14 @@ function CodeCard({ title, code }) {
           ))}
         </div>
         <pre>
-          <code className="code-content">{code}</code>
+          {highlightedHtml ? (
+            <code
+              className="code-content hljs"
+              dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+            />
+          ) : (
+            <code className="code-content">{code}</code>
+          )}
         </pre>
       </div>
     </div>
