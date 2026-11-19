@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CopyCode — Developer CheatSheet</title>
+  <!-- Syntax Highlighting & Theme Stylesheets -->
+  <link rel="stylesheet" href="vendor/atom-one-dark.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React 18, ReactDOM & Babel Standalone (Local with CDN fallback) -->
+  <script src="vendor/react.min.js"></script>
+  <script src="vendor/react-dom.min.js"></script>
+  <script src="vendor/babel.min.js"></script>
+  <script>
+    if (!window.React) {
+      document.write('<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"><\/script>');
+      document.write('<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"><\/script>');
+    }
+    if (!window.Babel) {
+      document.write('<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- Highlight.js Syntax Highlighter (Local with CDN fallback) -->
+  <script src="vendor/highlight.min.js"></script>
+  <script>
+    if (!window.hljs) {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- Modular Sidebar Sections -->
+  <script src="sections/spring-boot.js"></script>
+
+  <!-- React JSX Components (HTML + JavaScript combined) -->
+  <script type="text/babel">
+    // ── Sidebar Component (JSX) ─────────────────────────────────────────────
+    function Sidebar({
+      sections,
+      activeSectionId,
+      onSelectSection,
+      projectName,
+      inputVal,
+      setInputVal,
+      onApplyProjectName,
+      onResetProjectName
+    }) {
+      const handleSidebarSubmit = (e) => {
+        e.preventDefault();
+        if (onApplyProjectName) onApplyProjectName();
+      };
+
+      return (
+        <aside className="sidebar">
+          <div className="sidebar-header">
+            <h2>CheatSheets</h2>
+          </div>
+          <ul className="nav-list">
+            {sections.map((section) => (
+              <li
+                key={section.id}
+                className={`nav-item ${activeSectionId === section.id ? 'active' : ''}`}
+                onClick={() => onSelectSection(section.id)}
+              >
+                {section.title}
+              </li>
+            ))}
+          </ul>
+
+          <div className="sidebar-bottom-section">
+            <span className="sidebar-bottom-label">Project Name</span>
+            <form onSubmit={handleSidebarSubmit} className="sidebar-project-form">
+              <input
+                type="text"
+                className="sidebar-project-input"
+                placeholder="e.g. fsdevelopment"
+                value={inputVal || ''}
+                onChange={(e) => setInputVal(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="btn-primary btn-sm"
+                disabled={!inputVal || !inputVal.trim()}
+              >
+                Set
+              </button>
+            </form>
+            {projectName && (
+              <div className="sidebar-active-tag">
+                <span>{projectName}</span>
+                <button
+                  type="button"
+                  className="sidebar-reset-btn"
+                  onClick={onResetProjectName}
+                  title="Reset to dipdb"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+          </div>
+        </aside>
+      );
+    }
+
+    // ── CodeCard Component (JSX) ───────────────────────────────────────────
+    function CodeCard({ title, code }) {
+      const [copied, setCopied] = React.useState(false);
+
+      const handleCopy = async () => {
+        const textToCopy = code || '';
+        let success = false;
+
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(textToCopy);
+            success = true;
+          } catch (err) {}
+        }
+
+        if (!success) {
+          try {
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.top = '0';
+            textarea.style.left = '0';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+            success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+          } catch (e) {
+            console.error('Copy failed:', e);
+          }
+        }
+
+        if (success) {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1800);
+        }
+      };
+
+      const lines = (code || '').split('\n');
+
+      const highlightedHtml = React.useMemo(() => {
+        if (window.hljs && code) {
+          try {
+            return window.hljs.highlightAuto(code).value;
+          } catch (err) {
+            console.warn('Highlight failed:', err);
+          }
+        }
+        return null;
+      }, [code]);
+
+      return (
+        <div className="code-card">
+          <div className="code-toolbar">
+            <div className="left-section">
+              <div className="window-dots" aria-hidden="true">
+                <span className="dot dot-red"></span>
+                <span className="dot dot-yellow"></span>
+                <span className="dot dot-green"></span>
+              </div>
+              <span className="file-name">{title}</span>
+            </div>
+            <button
+              className={`btn btn-copy ${copied ? 'copied' : ''}`}
+              type="button"
+              onClick={handleCopy}
+              aria-label={`Copy ${title}`}
+            >
+              <svg
+                className="btn-icon copy-icon"
+                viewBox="0 0 24 24"
+                style={{ display: copied ? 'none' : 'inline-block' }}
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg
+                className="btn-icon check-icon"
+                viewBox="0 0 24 24"
+                style={{ display: copied ? 'inline-block' : 'none' }}
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span className="btn-text">{copied ? 'Copied!' : 'Copy'}</span>
+            </button>
+          </div>
+
+          <div className="code-body">
+            <div className="line-numbers" aria-hidden="true">
+              {lines.map((_, i) => (
+                <span key={i}>{i + 1}</span>
+              ))}
+            </div>
+            <pre>
+              {highlightedHtml ? (
+                <code
+                  className="code-content hljs"
+                  dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+                />
+              ) : (
+                <code className="code-content">{code}</code>
+              )}
+            </pre>
+          </div>
+        </div>
+      );
+    }
+
+    // ── App Component (JSX) ────────────────────────────────────────────────
+    function App({ sections }) {
+      const [activeSectionId, setActiveSectionId] = React.useState(
+        sections[0] ? sections[0].id : 'spring-boot-factory'
+      );
+      const [selectedType, setSelectedType] = React.useState('spring-boot-factory');
+      const [projectName, setProjectName] = React.useState('');
+      const [inputVal, setInputVal] = React.useState('');
+
+      const activeSection = sections.find((s) => s.id === activeSectionId) || sections[0];
+
+      const handleSelectSection = (id) => {
+        setActiveSectionId(id);
+        setSelectedType(id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      const handleApplyProjectName = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const trimmed = inputVal.trim();
+        if (!trimmed) return;
+        setProjectName(trimmed);
+        setActiveSectionId(selectedType);
+      };
+
+      const handleResetProjectName = () => {
+        setProjectName('');
+        setInputVal('');
+      };
+
+      const transformCode = (code) => {
+        if (!code || !projectName) return code;
+        return code.replace(/dipdb/g, projectName);
+      };
+
+      return (
+        <div className="layout-wrapper">
+          <Sidebar
+            sections={sections}
+            activeSectionId={activeSectionId}
+            onSelectSection={handleSelectSection}
+            projectName={projectName}
+            inputVal={inputVal}
+            setInputVal={setInputVal}
+            onApplyProjectName={handleApplyProjectName}
+            onResetProjectName={handleResetProjectName}
+          />
+          <div className="container">
+            {activeSection && (
+              <header className="page-header">
+                <h1 id="page-title">{activeSection.pageTitle}</h1>
+              </header>
+            )}
+
+            {!projectName ? (
+              <div className="project-input-container">
+                <div className="project-type-selector">
+                  <label className={`type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="projectType"
+                      value="spring-boot-factory"
+                      checked={selectedType === 'spring-boot-factory'}
+                      onChange={() => setSelectedType('spring-boot-factory')}
+                    />
+                    <span>Factory</span>
+                  </label>
+                  <label className={`type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="projectType"
+                      value="spring-boot-hospital"
+                      checked={selectedType === 'spring-boot-hospital'}
+                      onChange={() => setSelectedType('spring-boot-hospital')}
+                    />
+                    <span>Hospital</span>
+                  </label>
+                  <label className={`type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="projectType"
+                      value="spring-boot-bike"
+                      checked={selectedType === 'spring-boot-bike'}
+                      onChange={() => setSelectedType('spring-boot-bike')}
+                    />
+                    <span>Bike Showroom</span>
+                  </label>
+                </div>
+
+                <form onSubmit={handleApplyProjectName} className="project-form">
+                  <input
+                    type="text"
+                    className="project-input"
+                    placeholder="Enter project name (e.g. vasu)"
+                    value={inputVal}
+                    onChange={(e) => setInputVal(e.target.value)}
+                    autoFocus
+                  />
+                  <button
+                    type="submit"
+                    className="btn-primary"
+                    disabled={!inputVal.trim()}
+                  >
+                    Add Project Name
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <>
+                {activeSection && (
+                  <div className="code-section">
+                    {activeSection.cards.map((card, idx) => (
+                      <CodeCard
+                        key={`${activeSection.id}-${idx}-${projectName}`}
+                        title={card.title}
+                        code={transformCode(card.code)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // ── App Mount ──────────────────────────────────────────────────────────
+    (function init() {
+      const sectionIds = [
+        'spring-boot-factory',
+        'spring-boot-hospital',
+        'spring-boot-bike'
+      ];
+
+      const sections = sectionIds
+        .map((id) => (window.SECTIONS_DATA && window.SECTIONS_DATA[id]) || null)
+        .filter(Boolean);
+
+      const rootElement = document.getElementById('root');
+      if (rootElement && window.ReactDOM) {
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App sections={sections} />);
+      }
+    })();
+  </script>
+</body>
+</html>
