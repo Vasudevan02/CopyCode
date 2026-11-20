@@ -18,7 +18,13 @@ function Sidebar({
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <h2>CheatSheets</h2>
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>CheatSheets</span>
+        </h2>
       </div>
       <ul className="nav-list">
         {sections.map((section) => (
@@ -59,7 +65,10 @@ function Sidebar({
               onClick={onResetProjectName}
               title="Reset to dipdb"
             >
-              ✕
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
         )}
@@ -70,7 +79,11 @@ function Sidebar({
             onClick={onLock}
             title="Lock Page"
           >
-            🔒 Lock Page
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Lock Page</span>
           </button>
         )}
       </div>

@@ -58,7 +58,13 @@
       return (
         <aside className="sidebar">
           <div className="sidebar-header">
-            <h2>CheatSheets</h2>
+            <h2>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>CheatSheets</span>
+            </h2>
           </div>
           <ul className="nav-list">
             {sections.map((section) => (
@@ -99,7 +105,10 @@
                   onClick={onResetProjectName}
                   title="Reset to dipdb"
                 >
-                  ✕
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
                 </button>
               </div>
             )}
@@ -110,7 +119,11 @@
                 onClick={onLock}
                 title="Lock Page"
               >
-                🔒 Lock Page
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Lock Page</span>
               </button>
             )}
           </div>
@@ -353,6 +366,9 @@
                         checked={selectedType === 'spring-boot-factory'}
                         onChange={() => setSelectedType('spring-boot-factory')}
                       />
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                      </svg>
                       <span>Factory</span>
                     </label>
                     <label className={`type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}`}>
@@ -363,6 +379,10 @@
                         checked={selectedType === 'spring-boot-hospital'}
                         onChange={() => setSelectedType('spring-boot-hospital')}
                       />
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 6v12m-6-6h12"></path>
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                      </svg>
                       <span>Hospital</span>
                     </label>
                     <label className={`type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}`}>
@@ -373,6 +393,11 @@
                         checked={selectedType === 'spring-boot-bike'}
                         onChange={() => setSelectedType('spring-boot-bike')}
                       />
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                        <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                        <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 11l3-3 3 3.5h3"></path>
+                      </svg>
                       <span>Bike Showroom</span>
                     </label>
                   </div>

@@ -1,0 +1,4 @@
+.vscode/
+new/
+*.log
+.DS_Store
