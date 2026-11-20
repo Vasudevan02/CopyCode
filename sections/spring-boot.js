@@ -28,7 +28,7 @@ window.SECTIONS_DATA['spring-boot-factory'] = {
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
         },
         {
-            "title": "6. Postman Request Body (POST /newemploy)",
+            "title": "6. Factory (POST /newemploy)",
             "code": "{\n  \"empno\": 1,\n  \"ename\": \"Raju\",\n  \"job\": \"Developer\",\n  \"salary\": \"50000\"\n}"
         }
     ]
@@ -61,7 +61,7 @@ window.SECTIONS_DATA['spring-boot-hospital'] = {
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
         },
         {
-            "title": "6. Postman Request Body (POST /newpatient)",
+            "title": "6. Hospital (POST /newpatient)",
             "code": "{\n  \"p_id\": 1,\n  \"p_name\": \"Raju\",\n  \"p_address\": \"Chennai\",\n  \"p_phoneNo\": 9876543210\n}"
         }
     ]
@@ -94,7 +94,7 @@ window.SECTIONS_DATA['spring-boot-bike'] = {
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
         },
         {
-            "title": "6. Postman Request Body (POST /newbike)",
+            "title": "6. Bike Showroom (POST /newbike)",
             "code": "{\n  \"bike_id\": 1,\n  \"model_nuber\": \"R15\",\n  \"brand\": \"Yamaha\",\n  \"color\": \"Blue\"\n}"
         }
     ]

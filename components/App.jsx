@@ -112,7 +112,8 @@ function App({ sections }) {
         )}
 
         {!projectName ? (
-          <div className="project-input-container">
+          <>
+            <div className="project-input-container">
             <div className="project-type-selector">
               <label className={`type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}`}>
                 <input
@@ -164,6 +165,37 @@ function App({ sections }) {
               </button>
             </form>
           </div>
+
+          <div className="postman-reference-section">
+            <div className="postman-reference-header">
+              <h3>Postman Request Bodies (JSON)</h3>
+              <p>Sample payloads for testing POST endpoints</p>
+            </div>
+            <div className="postman-grid">
+              <div className="postman-card-wrapper">
+                <div className="postman-card-label">Hospital (POST /newpatient):</div>
+                <CodeCard
+                  title="POST /newpatient (JSON)"
+                  code={`{\n  "p_id": 1,\n  "p_name": "Raju",\n  "p_address": "Chennai",\n  "p_phoneNo": 9876543210\n}`}
+                />
+              </div>
+              <div className="postman-card-wrapper">
+                <div className="postman-card-label">Factory (POST /newemploy):</div>
+                <CodeCard
+                  title="POST /newemploy (JSON)"
+                  code={`{\n  "empno": 1,\n  "ename": "Raju",\n  "job": "Developer",\n  "salary": "50000"\n}`}
+                />
+              </div>
+              <div className="postman-card-wrapper">
+                <div className="postman-card-label">Bike Showroom (POST /newbike):</div>
+                <CodeCard
+                  title="POST /newbike (JSON)"
+                  code={`{\n  "bike_id": 1,\n  "model_nuber": "R15",\n  "brand": "Yamaha",\n  "color": "Blue"\n}`}
+                />
+              </div>
+            </div>
+          </div>
+          </>
         ) : (
           <>
             {activeSection && (

@@ -342,58 +342,90 @@
             )}
 
             {!projectName ? (
-              <div className="project-input-container">
-                <div className="project-type-selector">
-                  <label className={`type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}`}>
+              <>
+                <div className="project-input-container">
+                  <div className="project-type-selector">
+                    <label className={`type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}`}>
+                      <input
+                        type="radio"
+                        name="projectType"
+                        value="spring-boot-factory"
+                        checked={selectedType === 'spring-boot-factory'}
+                        onChange={() => setSelectedType('spring-boot-factory')}
+                      />
+                      <span>Factory</span>
+                    </label>
+                    <label className={`type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}`}>
+                      <input
+                        type="radio"
+                        name="projectType"
+                        value="spring-boot-hospital"
+                        checked={selectedType === 'spring-boot-hospital'}
+                        onChange={() => setSelectedType('spring-boot-hospital')}
+                      />
+                      <span>Hospital</span>
+                    </label>
+                    <label className={`type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}`}>
+                      <input
+                        type="radio"
+                        name="projectType"
+                        value="spring-boot-bike"
+                        checked={selectedType === 'spring-boot-bike'}
+                        onChange={() => setSelectedType('spring-boot-bike')}
+                      />
+                      <span>Bike Showroom</span>
+                    </label>
+                  </div>
+
+                  <form onSubmit={handleApplyProjectName} className="project-form">
                     <input
-                      type="radio"
-                      name="projectType"
-                      value="spring-boot-factory"
-                      checked={selectedType === 'spring-boot-factory'}
-                      onChange={() => setSelectedType('spring-boot-factory')}
+                      type="text"
+                      className="project-input"
+                      placeholder="Enter project name (e.g. vasu)"
+                      value={inputVal}
+                      onChange={(e) => setInputVal(e.target.value)}
+                      autoFocus
                     />
-                    <span>Factory</span>
-                  </label>
-                  <label className={`type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="projectType"
-                      value="spring-boot-hospital"
-                      checked={selectedType === 'spring-boot-hospital'}
-                      onChange={() => setSelectedType('spring-boot-hospital')}
-                    />
-                    <span>Hospital</span>
-                  </label>
-                  <label className={`type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="projectType"
-                      value="spring-boot-bike"
-                      checked={selectedType === 'spring-boot-bike'}
-                      onChange={() => setSelectedType('spring-boot-bike')}
-                    />
-                    <span>Bike Showroom</span>
-                  </label>
+                    <button
+                      type="submit"
+                      className="btn-primary"
+                      disabled={!inputVal.trim()}
+                    >
+                      Add Project Name
+                    </button>
+                  </form>
                 </div>
 
-                <form onSubmit={handleApplyProjectName} className="project-form">
-                  <input
-                    type="text"
-                    className="project-input"
-                    placeholder="Enter project name (e.g. vasu)"
-                    value={inputVal}
-                    onChange={(e) => setInputVal(e.target.value)}
-                    autoFocus
-                  />
-                  <button
-                    type="submit"
-                    className="btn-primary"
-                    disabled={!inputVal.trim()}
-                  >
-                    Add Project Name
-                  </button>
-                </form>
-              </div>
+                <div className="postman-reference-section">
+                  <div className="postman-reference-header">
+                    <h3>Postman Request Bodies (JSON)</h3>
+                    <p>Sample payloads for testing POST endpoints</p>
+                  </div>
+                  <div className="postman-grid">
+                    <div className="postman-card-wrapper">
+                      <div className="postman-card-label">Hospital (POST /newpatient):</div>
+                      <CodeCard
+                        title="POST /newpatient (JSON)"
+                        code={`{\n  "p_id": 1,\n  "p_name": "Raju",\n  "p_address": "Chennai",\n  "p_phoneNo": 9876543210\n}`}
+                      />
+                    </div>
+                    <div className="postman-card-wrapper">
+                      <div className="postman-card-label">Factory (POST /newemploy):</div>
+                      <CodeCard
+                        title="POST /newemploy (JSON)"
+                        code={`{\n  "empno": 1,\n  "ename": "Raju",\n  "job": "Developer",\n  "salary": "50000"\n}`}
+                      />
+                    </div>
+                    <div className="postman-card-wrapper">
+                      <div className="postman-card-label">Bike Showroom (POST /newbike):</div>
+                      <CodeCard
+                        title="POST /newbike (JSON)"
+                        code={`{\n  "bike_id": 1,\n  "model_nuber": "R15",\n  "brand": "Yamaha",\n  "color": "Blue"\n}`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
                 {activeSection && (

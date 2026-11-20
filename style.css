@@ -901,3 +901,51 @@ code.hljs {
   border-color: #484f58;
   color: var(--text-bright);
 }
+
+/* ── Postman Reference Below Three Projects ─────────────────────────────── */
+.postman-reference-section {
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.postman-reference-header {
+  text-align: center;
+}
+
+.postman-reference-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.postman-reference-header p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.postman-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.postman-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.postman-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #79c0ff;
+  padding-left: 0.25rem;
+}
