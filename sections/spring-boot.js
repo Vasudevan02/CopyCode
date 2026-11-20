@@ -26,6 +26,10 @@ window.SECTIONS_DATA['spring-boot-factory'] = {
         {
             "title": "5. MySQL Dependency (pom.xml)",
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
+        },
+        {
+            "title": "6. Postman Request Body (POST /newemploy)",
+            "code": "{\n  \"empno\": 1,\n  \"ename\": \"Raju\",\n  \"job\": \"Developer\",\n  \"salary\": \"50000\"\n}"
         }
     ]
 };
@@ -38,7 +42,7 @@ window.SECTIONS_DATA['spring-boot-hospital'] = {
     "cards": [
         {
             "title": "1. Patient.java (Entity)",
-            "code": "package com.example.dipdb.Entity;\n\nimport jakarta.persistence.*;\n\n@Entity\n@Table(name = \"patient\")\npublic class Patient {\n\n    @Id\n    @Column(name = \"p_id\")\n    private int p_id;\n\n    @Column(name = \"p_name\")\n    private String p_name;\n\n    @Column(name = \"p_address\")\n    private String p_address;\n\n    @Column(name = \"p_phoneNo\")\n    private int p_phoneNo;\n\n    public int getP_id() {\n        return p_id;\n    }\n\n    public void setP_id(int p_id) {\n        this.p_id = p_id;\n    }\n\n    public String getP_name() {\n        return p_name;\n    }\n\n    public void setP_name(String p_name) {\n        this.p_name = p_name;\n    }\n\n    public String getP_address() {\n        return p_address;\n    }\n\n    public void setP_address(String p_address) {\n        this.p_address = p_address;\n    }\n\n    public int getP_phoneNo() {\n        return p_phoneNo;\n    }\n\n    public void setP_phoneNo(int p_phoneNo) {\n        this.p_phoneNo = p_phoneNo;\n    }\n}"
+            "code": "package com.example.dipdb.Entity;\n\nimport jakarta.persistence.*;\n\n@Entity\n@Table(name = \"patient\")\npublic class Patient {\n\n    @Id\n    @Column(name = \"p_id\")\n    private int p_id;\n\n    @Column(name = \"p_name\")\n    private String p_name;\n\n    @Column(name = \"p_address\")\n    private String p_address;\n\n    @Column(name = \"p_phoneNo\")\n    private long p_phoneNo;\n\n    public int getP_id() {\n        return p_id;\n    }\n\n    public void setP_id(int p_id) {\n        this.p_id = p_id;\n    }\n\n    public String getP_name() {\n        return p_name;\n    }\n\n    public void setP_name(String p_name) {\n        this.p_name = p_name;\n    }\n\n    public String getP_address() {\n        return p_address;\n    }\n\n    public void setP_address(String p_address) {\n        this.p_address = p_address;\n    }\n\n    public long getP_phoneNo() {\n        return p_phoneNo;\n    }\n\n    public void setP_phoneNo(long p_phoneNo) {\n        this.p_phoneNo = p_phoneNo;\n    }\n}"
         },
         {
             "title": "2. application.properties",
@@ -55,6 +59,10 @@ window.SECTIONS_DATA['spring-boot-hospital'] = {
         {
             "title": "5. MySQL Dependency (pom.xml)",
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
+        },
+        {
+            "title": "6. Postman Request Body (POST /newpatient)",
+            "code": "{\n  \"p_id\": 1,\n  \"p_name\": \"Raju\",\n  \"p_address\": \"Chennai\",\n  \"p_phoneNo\": 9876543210\n}"
         }
     ]
 };
@@ -84,6 +92,10 @@ window.SECTIONS_DATA['spring-boot-bike'] = {
         {
             "title": "5. MySQL Dependency (pom.xml)",
             "code": "<!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->\n<dependency>\n    <groupId>mysql</groupId>\n    <artifactId>mysql-connector-java</artifactId>\n    <version>8.0.33</version>\n    <scope>compile</scope>\n</dependency>"
+        },
+        {
+            "title": "6. Postman Request Body (POST /newbike)",
+            "code": "{\n  \"bike_id\": 1,\n  \"model_nuber\": \"R15\",\n  \"brand\": \"Yamaha\",\n  \"color\": \"Blue\"\n}"
         }
     ]
 };
