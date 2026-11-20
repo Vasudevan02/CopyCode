@@ -11,483 +11,413 @@
 <body>
   <div id="root"></div>
 
-  <!-- React 18, ReactDOM & Babel Standalone (Local with CDN fallback) -->
-  <script src="vendor/react.min.js"></script>
-  <script src="vendor/react-dom.min.js"></script>
-  <script src="vendor/babel.min.js"></script>
-  <script>
-    if (!window.React) {
-      document.write('<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"><\/script>');
-      document.write('<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"><\/script>');
-    }
-    if (!window.Babel) {
-      document.write('<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>');
-    }
-  </script>
-
-  <!-- Highlight.js Syntax Highlighter (Local with CDN fallback) -->
+  <!-- Highlight.js Syntax Highlighter -->
   <script src="vendor/highlight.min.js"></script>
-  <script>
-    if (!window.hljs) {
-      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"><\/script>');
-    }
-  </script>
 
   <!-- Modular Sidebar Sections -->
   <script src="sections/spring-boot.js"></script>
 
-  <!-- React JSX Components (HTML + JavaScript combined) -->
-  <script type="text/babel">
-    // ── Sidebar Component (JSX) ─────────────────────────────────────────────
-    function Sidebar({
-      sections,
-      activeSectionId,
-      onSelectSection,
-      projectName,
-      inputVal,
-      setInputVal,
-      onApplyProjectName,
-      onResetProjectName,
-      onLock
-    }) {
-      const handleSidebarSubmit = (e) => {
-        e.preventDefault();
-        if (onApplyProjectName) onApplyProjectName();
-      };
+  <!-- Fast Native JavaScript Application (Zero Babel, Instant Load) -->
+  <script>
+    (function () {
+      'use strict';
 
-      return (
-        <aside className="sidebar">
-          <div className="sidebar-header">
-            <h2>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-              <span>CheatSheets</span>
-            </h2>
-          </div>
-          <ul className="nav-list">
-            {sections.map((section) => (
-              <li
-                key={section.id}
-                className={`nav-item ${activeSectionId === section.id ? 'active' : ''}`}
-                onClick={() => onSelectSection(section.id)}
-              >
-                {section.title}
-              </li>
-            ))}
-          </ul>
-
-          <div className="sidebar-bottom-section">
-            <span className="sidebar-bottom-label">Project Name</span>
-            <form onSubmit={handleSidebarSubmit} className="sidebar-project-form">
-              <input
-                type="text"
-                className="sidebar-project-input"
-                placeholder="e.g. fsdevelopment"
-                value={inputVal || ''}
-                onChange={(e) => setInputVal(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="btn-primary btn-sm"
-                disabled={!inputVal || !inputVal.trim()}
-              >
-                Set
-              </button>
-            </form>
-            {projectName && (
-              <div className="sidebar-active-tag">
-                <span>{projectName}</span>
-                <button
-                  type="button"
-                  className="sidebar-reset-btn"
-                  onClick={onResetProjectName}
-                  title="Reset to dipdb"
-                >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            )}
-            {onLock && (
-              <button
-                type="button"
-                className="sidebar-lock-btn"
-                onClick={onLock}
-                title="Lock Page"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-                <span>Lock Page</span>
-              </button>
-            )}
-          </div>
-        </aside>
-      );
-    }
-
-    // ── CodeCard Component (JSX) ───────────────────────────────────────────
-    function CodeCard({ title, code }) {
-      const [copied, setCopied] = React.useState(false);
-
-      const handleCopy = async () => {
-        const textToCopy = code || '';
-        let success = false;
-
-        if (navigator.clipboard && window.isSecureContext) {
-          try {
-            await navigator.clipboard.writeText(textToCopy);
-            success = true;
-          } catch (err) {}
-        }
-
-        if (!success) {
-          try {
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed';
-            textarea.style.top = '0';
-            textarea.style.left = '0';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.focus();
-            textarea.select();
-            textarea.setSelectionRange(0, textarea.value.length);
-            success = document.execCommand('copy');
-            document.body.removeChild(textarea);
-          } catch (e) {
-            console.error('Copy failed:', e);
-          }
-        }
-
-        if (success) {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 1800);
-        }
-      };
-
-      const lines = (code || '').split('\n');
-
-      const highlightedHtml = React.useMemo(() => {
-        if (window.hljs && code) {
-          try {
-            return window.hljs.highlightAuto(code).value;
-          } catch (err) {
-            console.warn('Highlight failed:', err);
-          }
-        }
-        return null;
-      }, [code]);
-
-      return (
-        <div className="code-card">
-          <div className="code-toolbar">
-            <div className="left-section">
-              <div className="window-dots" aria-hidden="true">
-                <span className="dot dot-red"></span>
-                <span className="dot dot-yellow"></span>
-                <span className="dot dot-green"></span>
-              </div>
-              <span className="file-name">{title}</span>
-            </div>
-            <button
-              className={`btn btn-copy ${copied ? 'copied' : ''}`}
-              type="button"
-              onClick={handleCopy}
-              aria-label={`Copy ${title}`}
-            >
-              <svg
-                className="btn-icon copy-icon"
-                viewBox="0 0 24 24"
-                style={{ display: copied ? 'none' : 'inline-block' }}
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <svg
-                className="btn-icon check-icon"
-                viewBox="0 0 24 24"
-                style={{ display: copied ? 'inline-block' : 'none' }}
-              >
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span className="btn-text">{copied ? 'Copied!' : 'Copy'}</span>
-            </button>
-          </div>
-
-          <div className="code-body">
-            <div className="line-numbers" aria-hidden="true">
-              {lines.map((_, i) => (
-                <span key={i}>{i + 1}</span>
-              ))}
-            </div>
-            <pre>
-              {highlightedHtml ? (
-                <code
-                  className="code-content hljs"
-                  dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-                />
-              ) : (
-                <code className="code-content">{code}</code>
-              )}
-            </pre>
-          </div>
-        </div>
-      );
-    }
-
-    // ── App Component (JSX) ────────────────────────────────────────────────
-    function App({ sections }) {
-      const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
-        return sessionStorage.getItem('copycode_auth') === 'true';
-      });
-      const [passwordInput, setPasswordInput] = React.useState('');
-      const [authError, setAuthError] = React.useState(false);
-
-      const [activeSectionId, setActiveSectionId] = React.useState(
-        sections[0] ? sections[0].id : 'spring-boot-factory'
-      );
-      const [selectedType, setSelectedType] = React.useState('spring-boot-factory');
-      const [projectName, setProjectName] = React.useState('');
-      const [inputVal, setInputVal] = React.useState('');
-
-      const activeSection = sections.find((s) => s.id === activeSectionId) || sections[0];
-
-      const handleLogin = (e) => {
-        e.preventDefault();
-        if (passwordInput === '@123@') {
-          setIsAuthenticated(true);
-          setAuthError(false);
-          sessionStorage.setItem('copycode_auth', 'true');
-        } else {
-          setAuthError(true);
-        }
-      };
-
-      const handleLock = () => {
-        sessionStorage.removeItem('copycode_auth');
-        setIsAuthenticated(false);
-        setPasswordInput('');
-        setAuthError(false);
-      };
-
-      const handleSelectSection = (id) => {
-        setActiveSectionId(id);
-        setSelectedType(id);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      const handleApplyProjectName = (e) => {
-        if (e && e.preventDefault) e.preventDefault();
-        const trimmed = inputVal.trim();
-        if (!trimmed) return;
-        setProjectName(trimmed);
-        setActiveSectionId(selectedType);
-      };
-
-      const handleResetProjectName = () => {
-        setProjectName('');
-        setInputVal('');
-      };
-
-      const transformCode = (code) => {
-        if (!code || !projectName) return code;
-        return code.replace(/dipdb/g, projectName);
-      };
-
-      if (!isAuthenticated) {
-        return (
-          <div className="login-overlay">
-            <div className="login-card">
-              <div className="login-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-              </div>
-              <h2>CopyCode Access</h2>
-              <p className="login-subtitle">Enter password to unlock developer cheat sheets</p>
-              <form onSubmit={handleLogin} className="login-form">
-                <input
-                  type="password"
-                  className={`project-input login-input ${authError ? 'input-error' : ''}`}
-                  placeholder="Enter password..."
-                  value={passwordInput}
-                  onChange={(e) => {
-                    setPasswordInput(e.target.value);
-                    if (authError) setAuthError(false);
-                  }}
-                  autoFocus
-                />
-                {authError && <div className="login-error-msg">Incorrect password. Please try again.</div>}
-                <button type="submit" className="btn-primary login-btn">
-                  Unlock
-                </button>
-              </form>
-            </div>
-          </div>
-        );
-      }
-
-      return (
-        <div className="layout-wrapper">
-          <Sidebar
-            sections={sections}
-            activeSectionId={activeSectionId}
-            onSelectSection={handleSelectSection}
-            projectName={projectName}
-            inputVal={inputVal}
-            setInputVal={setInputVal}
-            onApplyProjectName={handleApplyProjectName}
-            onResetProjectName={handleResetProjectName}
-            onLock={handleLock}
-          />
-          <div className="container">
-            {activeSection && (
-              <header className="page-header">
-                <h1 id="page-title">{activeSection.pageTitle}</h1>
-              </header>
-            )}
-
-            {!projectName ? (
-              <>
-                <div className="project-input-container">
-                  <div className="project-type-selector">
-                    <label className={`type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}`}>
-                      <input
-                        type="radio"
-                        name="projectType"
-                        value="spring-boot-factory"
-                        checked={selectedType === 'spring-boot-factory'}
-                        onChange={() => setSelectedType('spring-boot-factory')}
-                      />
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
-                      </svg>
-                      <span>Factory</span>
-                    </label>
-                    <label className={`type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}`}>
-                      <input
-                        type="radio"
-                        name="projectType"
-                        value="spring-boot-hospital"
-                        checked={selectedType === 'spring-boot-hospital'}
-                        onChange={() => setSelectedType('spring-boot-hospital')}
-                      />
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M12 6v12m-6-6h12"></path>
-                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                      </svg>
-                      <span>Hospital</span>
-                    </label>
-                    <label className={`type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}`}>
-                      <input
-                        type="radio"
-                        name="projectType"
-                        value="spring-boot-bike"
-                        checked={selectedType === 'spring-boot-bike'}
-                        onChange={() => setSelectedType('spring-boot-bike')}
-                      />
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <circle cx="5.5" cy="17.5" r="3.5"></circle>
-                        <circle cx="18.5" cy="17.5" r="3.5"></circle>
-                        <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 11l3-3 3 3.5h3"></path>
-                      </svg>
-                      <span>Bike Showroom</span>
-                    </label>
-                  </div>
-
-                  <form onSubmit={handleApplyProjectName} className="project-form">
-                    <input
-                      type="text"
-                      className="project-input"
-                      placeholder="Enter project name (e.g. vasu)"
-                      value={inputVal}
-                      onChange={(e) => setInputVal(e.target.value)}
-                      autoFocus
-                    />
-                    <button
-                      type="submit"
-                      className="btn-primary"
-                      disabled={!inputVal.trim()}
-                    >
-                      Add Project Name
-                    </button>
-                  </form>
-                </div>
-
-                <div className="postman-reference-section">
-                  <div className="postman-reference-header">
-                    <h3>Postman Request Bodies (JSON)</h3>
-                    <p>Sample payloads for testing POST endpoints</p>
-                  </div>
-                  <div className="postman-grid">
-                    <div className="postman-card-wrapper">
-                      <div className="postman-card-label">Hospital (POST /newpatient):</div>
-                      <CodeCard
-                        title="POST /newpatient (JSON)"
-                        code={`{\n  "p_id": 1,\n  "p_name": "Raju",\n  "p_address": "Chennai",\n  "p_phoneNo": 9876543210\n}`}
-                      />
-                    </div>
-                    <div className="postman-card-wrapper">
-                      <div className="postman-card-label">Factory (POST /newemploy):</div>
-                      <CodeCard
-                        title="POST /newemploy (JSON)"
-                        code={`{\n  "empno": 1,\n  "ename": "Raju",\n  "job": "Developer",\n  "salary": "50000"\n}`}
-                      />
-                    </div>
-                    <div className="postman-card-wrapper">
-                      <div className="postman-card-label">Bike Showroom (POST /newbike):</div>
-                      <CodeCard
-                        title="POST /newbike (JSON)"
-                        code={`{\n  "bike_id": 1,\n  "model_nuber": "R15",\n  "brand": "Yamaha",\n  "color": "Blue"\n}`}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {activeSection && (
-                  <div className="code-section">
-                    {activeSection.cards.map((card, idx) => (
-                      <CodeCard
-                        key={`${activeSection.id}-${idx}-${projectName}`}
-                        title={card.title}
-                        code={transformCode(card.code)}
-                      />
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    // ── App Mount ──────────────────────────────────────────────────────────
-    (function init() {
-      const sectionIds = [
+      const SECTION_IDS = [
         'spring-boot-factory',
         'spring-boot-hospital',
         'spring-boot-bike'
       ];
 
-      const sections = sectionIds
-        .map((id) => (window.SECTIONS_DATA && window.SECTIONS_DATA[id]) || null)
-        .filter(Boolean);
+      // State
+      let isAuthenticated = sessionStorage.getItem('copycode_auth') === 'true';
+      let authError = false;
+      let activeSectionId = 'spring-boot-factory';
+      let selectedType = 'spring-boot-factory';
+      let projectName = '';
+      let inputVal = '';
 
-      const rootElement = document.getElementById('root');
-      if (rootElement && window.ReactDOM) {
-        const root = ReactDOM.createRoot(rootElement);
-        root.render(<App sections={sections} />);
+      const root = document.getElementById('root');
+      const codeStore = {};
+      let cardIdCounter = 0;
+
+      function getSections() {
+        return SECTION_IDS
+          .map(function (id) {
+            return (window.SECTIONS_DATA && window.SECTIONS_DATA[id]) || null;
+          })
+          .filter(Boolean);
       }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function transformCode(code, name) {
+        if (!code || !name) return code;
+        return code.replace(/dipdb/g, name);
+      }
+
+      // Copy Helper
+      window.handleCopy = async function (btn, id) {
+        const code = codeStore[id] || '';
+        let success = false;
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(code);
+            success = true;
+          } catch (e) {}
+        }
+        if (!success) {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = code;
+            ta.style.position = 'fixed';
+            ta.style.top = '0';
+            ta.style.left = '0';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            success = document.execCommand('copy');
+            document.body.removeChild(ta);
+          } catch (err) {
+            console.error('Copy failed:', err);
+          }
+        }
+        if (success) {
+          btn.classList.add('copied');
+          const copyIcon = btn.querySelector('.copy-icon');
+          const checkIcon = btn.querySelector('.check-icon');
+          const btnText = btn.querySelector('.btn-text');
+          if (copyIcon) copyIcon.style.display = 'none';
+          if (checkIcon) checkIcon.style.display = 'inline-block';
+          if (btnText) btnText.textContent = 'Copied!';
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            if (copyIcon) copyIcon.style.display = 'inline-block';
+            if (checkIcon) checkIcon.style.display = 'none';
+            if (btnText) btnText.textContent = 'Copy';
+          }, 1800);
+        }
+      };
+
+      // Card Renderer
+      function renderCodeCard(title, code) {
+        const id = 'c_' + (++cardIdCounter);
+        codeStore[id] = code || '';
+
+        let highlighted = '';
+        if (window.hljs && code) {
+          try {
+            highlighted = window.hljs.highlightAuto(code).value;
+          } catch (e) {
+            highlighted = escapeHtml(code);
+          }
+        } else {
+          highlighted = escapeHtml(code || '');
+        }
+
+        const lines = (code || '').split('\n');
+        const lineNumbers = lines.map(function (_, i) {
+          return '<span>' + (i + 1) + '</span>';
+        }).join('');
+
+        return `
+          <div class="code-card">
+            <div class="code-toolbar">
+              <div class="left-section">
+                <div class="window-dots" aria-hidden="true">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <span class="file-name">${escapeHtml(title)}</span>
+              </div>
+              <button class="btn btn-copy" type="button" onclick="window.handleCopy(this, '${id}')" aria-label="Copy ${escapeHtml(title)}">
+                <svg class="btn-icon copy-icon" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <svg class="btn-icon check-icon" viewBox="0 0 24 24" style="display:none;">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span class="btn-text">Copy</span>
+              </button>
+            </div>
+            <div class="code-body">
+              <div class="line-numbers" aria-hidden="true">${lineNumbers}</div>
+              <pre><code class="code-content hljs">${highlighted}</code></pre>
+            </div>
+          </div>
+        `;
+      }
+
+      // Actions
+      window.handleLoginSubmit = function (e) {
+        e.preventDefault();
+        const input = document.getElementById('login-password');
+        if (input && input.value === '@123@') {
+          isAuthenticated = true;
+          authError = false;
+          sessionStorage.setItem('copycode_auth', 'true');
+          render();
+        } else {
+          authError = true;
+          render();
+        }
+      };
+
+      window.lockPage = function () {
+        sessionStorage.removeItem('copycode_auth');
+        isAuthenticated = false;
+        authError = false;
+        render();
+      };
+
+      window.selectSection = function (id) {
+        activeSectionId = id;
+        selectedType = id;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      window.changeProjectType = function (type) {
+        selectedType = type;
+        activeSectionId = type;
+        render();
+      };
+
+      window.applyProjectName = function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const trimmed = inputVal.trim();
+        if (!trimmed) return;
+        projectName = trimmed;
+        activeSectionId = selectedType;
+        render();
+      };
+
+      window.resetProjectName = function () {
+        projectName = '';
+        inputVal = '';
+        render();
+      };
+
+      window.handleMainInput = function (e) {
+        inputVal = e.target.value;
+      };
+
+      window.handleSidebarInput = function (e) {
+        inputVal = e.target.value;
+      };
+
+      window.handleSidebarSubmit = function (e) {
+        e.preventDefault();
+        const input = document.getElementById('sidebar-project-input');
+        if (input) {
+          const val = input.value.trim();
+          if (val) {
+            inputVal = val;
+            projectName = val;
+            activeSectionId = selectedType;
+            render();
+          }
+        }
+      };
+
+      // Main Render
+      function render() {
+        cardIdCounter = 0;
+
+        if (!isAuthenticated) {
+          root.innerHTML = `
+            <div class="login-overlay">
+              <div class="login-card">
+                <div class="login-icon">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <h2>CopyCode Access</h2>
+                <p class="login-subtitle">Enter password to unlock developer cheat sheets</p>
+                <form class="login-form" onsubmit="window.handleLoginSubmit(event)">
+                  <input
+                    type="password"
+                    id="login-password"
+                    class="project-input login-input ${authError ? 'input-error' : ''}"
+                    placeholder="Enter password..."
+                    autofocus
+                  />
+                  ${authError ? '<div class="login-error-msg">Incorrect password. Please try again.</div>' : ''}
+                  <button type="submit" class="btn-primary login-btn">Unlock</button>
+                </form>
+              </div>
+            </div>
+          `;
+          const pwdInput = document.getElementById('login-password');
+          if (pwdInput) pwdInput.focus();
+          return;
+        }
+
+        const sections = getSections();
+        const activeSection = sections.find(function (s) {
+          return s.id === activeSectionId;
+        }) || sections[0] || { pageTitle: 'Spring Boot Projects', cards: [] };
+
+        const sidebarHtml = `
+          <aside class="sidebar">
+            <div class="sidebar-header">
+              <h2>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>CheatSheets</span>
+              </h2>
+            </div>
+            <ul class="nav-list">
+              ${sections.map(function (s) {
+                return `
+                  <li class="nav-item ${activeSectionId === s.id ? 'active' : ''}" onclick="window.selectSection('${s.id}')">
+                    ${escapeHtml(s.title)}
+                  </li>
+                `;
+              }).join('')}
+            </ul>
+
+            <div class="sidebar-bottom-section">
+              <span class="sidebar-bottom-label">Project Name</span>
+              <form class="sidebar-project-form" onsubmit="window.handleSidebarSubmit(event)">
+                <input
+                  type="text"
+                  id="sidebar-project-input"
+                  class="sidebar-project-input"
+                  placeholder="e.g. fsdevelopment"
+                  value="${escapeHtml(inputVal)}"
+                  oninput="window.handleSidebarInput(event)"
+                />
+                <button type="submit" class="btn-primary btn-sm">Set</button>
+              </form>
+              ${projectName ? `
+                <div class="sidebar-active-tag">
+                  <span>${escapeHtml(projectName)}</span>
+                  <button type="button" class="sidebar-reset-btn" onclick="window.resetProjectName()" title="Reset to dipdb">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              ` : ''}
+              <button type="button" class="sidebar-lock-btn" onclick="window.lockPage()" title="Lock Page">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Lock Page</span>
+              </button>
+            </div>
+          </aside>
+        `;
+
+        let mainContentHtml = '';
+
+        if (!projectName) {
+          mainContentHtml = `
+            <div class="project-input-container">
+              <div class="project-type-selector">
+                <label class="type-option ${selectedType === 'spring-boot-factory' ? 'selected' : ''}">
+                  <input type="radio" name="projectType" value="spring-boot-factory" ${selectedType === 'spring-boot-factory' ? 'checked' : ''} onchange="window.changeProjectType('spring-boot-factory')" />
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                  </svg>
+                  <span>Factory</span>
+                </label>
+                <label class="type-option ${selectedType === 'spring-boot-hospital' ? 'selected' : ''}">
+                  <input type="radio" name="projectType" value="spring-boot-hospital" ${selectedType === 'spring-boot-hospital' ? 'checked' : ''} onchange="window.changeProjectType('spring-boot-hospital')" />
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 6v12m-6-6h12"></path>
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  </svg>
+                  <span>Hospital</span>
+                </label>
+                <label class="type-option ${selectedType === 'spring-boot-bike' ? 'selected' : ''}">
+                  <input type="radio" name="projectType" value="spring-boot-bike" ${selectedType === 'spring-boot-bike' ? 'checked' : ''} onchange="window.changeProjectType('spring-boot-bike')" />
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                    <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                    <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 11l3-3 3 3.5h3"></path>
+                  </svg>
+                  <span>Bike Showroom</span>
+                </label>
+              </div>
+
+              <form class="project-form" onsubmit="window.applyProjectName(event)">
+                <input
+                  type="text"
+                  id="main-project-input"
+                  class="project-input"
+                  placeholder="Enter project name (e.g. vasu)"
+                  value="${escapeHtml(inputVal)}"
+                  oninput="window.handleMainInput(event)"
+                  autofocus
+                />
+                <button type="submit" class="btn-primary">Add Project Name</button>
+              </form>
+            </div>
+
+            <div class="postman-reference-section">
+              <div class="postman-reference-header">
+                <h3>Postman Request Bodies (JSON)</h3>
+                <p>Sample payloads for testing POST endpoints</p>
+              </div>
+              <div class="postman-grid">
+                <div class="postman-card-wrapper">
+                  <div class="postman-card-label">Hospital (POST /newpatient):</div>
+                  ${renderCodeCard("POST /newpatient (JSON)", `{\n  "p_id": 1,\n  "p_name": "Raju",\n  "p_address": "Chennai",\n  "p_phoneNo": 9876543210\n}`)}
+                </div>
+                <div class="postman-card-wrapper">
+                  <div class="postman-card-label">Factory (POST /newemploy):</div>
+                  ${renderCodeCard("POST /newemploy (JSON)", `{\n  "empno": 1,\n  "ename": "Raju",\n  "job": "Developer",\n  "salary": "50000"\n}`)}
+                </div>
+                <div class="postman-card-wrapper">
+                  <div class="postman-card-label">Bike Showroom (POST /newbike):</div>
+                  ${renderCodeCard("POST /newbike (JSON)", `{\n  "bike_id": 1,\n  "model_nuber": "R15",\n  "brand": "Yamaha",\n  "color": "Blue"\n}`)}
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          mainContentHtml = `
+            <div class="code-section">
+              ${(activeSection.cards || []).map(function (card) {
+                return renderCodeCard(card.title, transformCode(card.code, projectName));
+              }).join('')}
+            </div>
+          `;
+        }
+
+        root.innerHTML = `
+          <div class="layout-wrapper">
+            ${sidebarHtml}
+            <div class="container">
+              <header class="page-header">
+                <h1 id="page-title">${escapeHtml(activeSection.pageTitle)}</h1>
+              </header>
+              ${mainContentHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      // Initial Mount
+      render();
     })();
   </script>
 </body>

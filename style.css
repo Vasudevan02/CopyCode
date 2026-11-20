@@ -482,57 +482,6 @@ code.hljs {
   cursor: pointer;
 }
 
-.project-setup-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  padding: 2.75rem 2rem;
-  max-width: 620px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.setup-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(88, 166, 255, 0.12);
-  border: 1px solid rgba(88, 166, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-color);
-}
-
-.project-setup-card h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-bright);
-}
-
-.project-setup-card p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  max-width: 480px;
-}
-
-.project-setup-card code,
-.project-banner code {
-  background: rgba(110, 118, 129, 0.2);
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  color: #79c0ff;
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-}
-
 .project-form {
   display: flex;
   gap: 0.75rem;
@@ -614,59 +563,6 @@ code.hljs {
   width: 180px;
 }
 
-/* ── Project Banner (Top of Code Section) ────────────────────────────────── */
-.project-banner {
-  width: 100%;
-  max-width: 880px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 0.85rem 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
-.project-banner-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.project-badge {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  background: rgba(88, 166, 255, 0.15);
-  color: var(--accent-color);
-  border: 1px solid rgba(88, 166, 255, 0.3);
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-}
-
-.project-name-display {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: #79c0ff;
-  font-size: 1.05rem;
-}
-
-.project-hint {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.project-edit-form {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
 /* ── Sidebar Bottom Section ──────────────────────────────────────────────── */
 .sidebar-bottom-section {
   margin-top: auto;
@@ -738,69 +634,9 @@ code.hljs {
   opacity: 0.8;
 }
 
-/* ── Bottom Section (Page Footer / Project Name Controls) ─────────────────── */
-.bottom-section {
-  width: 100%;
-  max-width: 880px;
-  margin-top: 0.5rem;
-}
-
-.bottom-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem 1.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-}
-
-.bottom-card-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.bottom-card-title {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-bright);
-}
-
-.bottom-card-title svg {
-  color: var(--accent-color);
-}
-
-.bottom-card-desc {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.bottom-active-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(63, 185, 80, 0.12);
-  border: 1px solid rgba(63, 185, 80, 0.3);
-  color: var(--success-color);
-  padding: 0.45rem 0.85rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  width: fit-content;
-}
-
 @media (max-width: 580px) {
   .project-form {
     flex-direction: column;
-  }
-  .project-banner {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
