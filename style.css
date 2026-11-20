@@ -799,3 +799,105 @@ code.hljs {
     align-items: flex-start;
   }
 }
+
+/* ── Login Overlay & Card ─────────────────────────────────────────────────── */
+.login-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  padding: 1.5rem;
+}
+
+.login-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 2.75rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.login-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(88, 166, 255, 0.12);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+}
+
+.login-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.login-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  line-height: 1.4;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.login-input {
+  width: 100%;
+  text-align: center;
+  font-size: 1.05rem;
+  letter-spacing: 0.15em;
+}
+
+.login-input.input-error {
+  border-color: #f85149;
+  box-shadow: 0 0 0 3px rgba(248, 81, 73, 0.2);
+}
+
+.login-error-msg {
+  color: #f85149;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.sidebar-lock-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.18s ease;
+  margin-top: 0.25rem;
+}
+
+.sidebar-lock-btn:hover {
+  border-color: #484f58;
+  color: var(--text-bright);
+}

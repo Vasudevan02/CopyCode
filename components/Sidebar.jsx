@@ -7,7 +7,8 @@ function Sidebar({
   inputVal,
   setInputVal,
   onApplyProjectName,
-  onResetProjectName
+  onResetProjectName,
+  onLock
 }) {
   const handleSidebarSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +62,16 @@ function Sidebar({
               ✕
             </button>
           </div>
+        )}
+        {onLock && (
+          <button
+            type="button"
+            className="sidebar-lock-btn"
+            onClick={onLock}
+            title="Lock Page"
+          >
+            🔒 Lock Page
+          </button>
         )}
       </div>
     </aside>

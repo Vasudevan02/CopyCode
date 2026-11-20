@@ -1,5 +1,11 @@
 // App.jsx - Root React JSX Component for CopyCode
 function App({ sections }) {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
+    return sessionStorage.getItem('copycode_auth') === 'true';
+  });
+  const [passwordInput, setPasswordInput] = React.useState('');
+  const [authError, setAuthError] = React.useState(false);
+
   const [activeSectionId, setActiveSectionId] = React.useState(
     sections[0] ? sections[0].id : 'spring-boot-factory'
   );
@@ -8,6 +14,24 @@ function App({ sections }) {
   const [inputVal, setInputVal] = React.useState('');
 
   const activeSection = sections.find((s) => s.id === activeSectionId) || sections[0];
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (passwordInput === '@123@') {
+      setIsAuthenticated(true);
+      setAuthError(false);
+      sessionStorage.setItem('copycode_auth', 'true');
+    } else {
+      setAuthError(true);
+    }
+  };
+
+  const handleLock = () => {
+    sessionStorage.removeItem('copycode_auth');
+    setIsAuthenticated(false);
+    setPasswordInput('');
+    setAuthError(false);
+  };
 
   const handleSelectSection = (id) => {
     setActiveSectionId(id);
@@ -33,6 +57,40 @@ function App({ sections }) {
     return code.replace(/dipdb/g, projectName);
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="login-overlay">
+        <div className="login-card">
+          <div className="login-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h2>CopyCode Access</h2>
+          <p className="login-subtitle">Enter password to unlock developer cheat sheets</p>
+          <form onSubmit={handleLogin} className="login-form">
+            <input
+              type="password"
+              className={`project-input login-input ${authError ? 'input-error' : ''}`}
+              placeholder="Enter password..."
+              value={passwordInput}
+              onChange={(e) => {
+                setPasswordInput(e.target.value);
+                if (authError) setAuthError(false);
+              }}
+              autoFocus
+            />
+            {authError && <div className="login-error-msg">Incorrect password. Please try again.</div>}
+            <button type="submit" className="btn-primary login-btn">
+              Unlock
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="layout-wrapper">
       <Sidebar
@@ -44,6 +102,7 @@ function App({ sections }) {
         setInputVal={setInputVal}
         onApplyProjectName={handleApplyProjectName}
         onResetProjectName={handleResetProjectName}
+        onLock={handleLock}
       />
       <div className="container">
         {activeSection && (
